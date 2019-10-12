@@ -1,0 +1,729 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0079)https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html -->
+<html class="gr__linuxtopia_org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script async="" src="./An Introduction to GCC - Floating-point issues_files/analytics.js.download"></script><script type="text/javascript" async="" src="./An Introduction to GCC - Floating-point issues_files/ga.js.download"></script><script async="" type="text/javascript" src="./An Introduction to GCC - Floating-point issues_files/gpt.js.download"></script><script type="text/javascript">
+	var __banger_pmp_deals=[{"SlotName":"/1254144/linuxtopia_org-medrectangle-1","Deals":[{"DealId":17,"Floor":160},{"DealId":18,"Floor":25},{"DealId":19,"Floor":100},{"DealId":20,"Floor":300},{"DealId":7,"Floor":150},{"DealId":8,"Floor":200},{"DealId":9,"Floor":300},{"DealId":10,"Floor":400},{"DealId":11,"Floor":500},{"DealId":12,"Floor":600},{"DealId":13,"Floor":700},{"DealId":14,"Floor":800},{"DealId":15,"Floor":1000}]},{"SlotName":"/1254144/linuxtopia_org-large-leaderboard-1","Deals":[{"DealId":17,"Floor":160},{"DealId":18,"Floor":25},{"DealId":19,"Floor":100},{"DealId":20,"Floor":300},{"DealId":21,"Floor":2000},{"DealId":7,"Floor":150},{"DealId":8,"Floor":200},{"DealId":9,"Floor":300},{"DealId":10,"Floor":400},{"DealId":11,"Floor":500},{"DealId":12,"Floor":600},{"DealId":13,"Floor":700},{"DealId":14,"Floor":800},{"DealId":15,"Floor":1000},{"DealId":16,"Floor":1500}]},{"SlotName":"/1254144/linuxtopia_org-box-2","Deals":[{"DealId":17,"Floor":160},{"DealId":18,"Floor":25},{"DealId":19,"Floor":100},{"DealId":20,"Floor":300},{"DealId":21,"Floor":2000},{"DealId":7,"Floor":150},{"DealId":8,"Floor":200},{"DealId":9,"Floor":300},{"DealId":10,"Floor":400},{"DealId":11,"Floor":500},{"DealId":12,"Floor":600},{"DealId":13,"Floor":700},{"DealId":14,"Floor":800},{"DealId":15,"Floor":1000},{"DealId":16,"Floor":1500}]},{"SlotName":"/1254144/linuxtopia_org-box-3","Deals":[{"DealId":17,"Floor":160},{"DealId":18,"Floor":25},{"DealId":19,"Floor":100},{"DealId":20,"Floor":300},{"DealId":7,"Floor":150},{"DealId":8,"Floor":200},{"DealId":9,"Floor":300},{"DealId":10,"Floor":400},{"DealId":11,"Floor":500},{"DealId":12,"Floor":600},{"DealId":13,"Floor":700},{"DealId":14,"Floor":800},{"DealId":15,"Floor":1000}]},{"SlotName":"/1254144/linuxtopia_org-large-billboard-2","Deals":[{"DealId":17,"Floor":160},{"DealId":18,"Floor":25},{"DealId":19,"Floor":100},{"DealId":20,"Floor":300},{"DealId":21,"Floor":2000},{"DealId":7,"Floor":150},{"DealId":8,"Floor":200},{"DealId":9,"Floor":300},{"DealId":10,"Floor":400},{"DealId":11,"Floor":500},{"DealId":12,"Floor":600},{"DealId":13,"Floor":700},{"DealId":14,"Floor":800},{"DealId":15,"Floor":1000},{"DealId":16,"Floor":1500}]}];
+</script>
+<script type="text/javascript">_ebcids=[138231308856,138231308940,138231308949,138231387842,138231421744,138231421759,138231421774,138231421783,138231421789,138231421792,138242067587,138242067590,138242067602,138242067605,138242067608,138242067614,138242229406,138242229415,138242229421,138242229430];</script>
+<script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">ezobv = 60;</script><script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
+function ez_isclean( data ) {
+    if (typeof data === 'undefined') { data = document.URL; }
+    var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))(@|%2540|%40)((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+    var isClean = !re.test(data);
+    return isClean;
+}
+
+var ez_queue = new Array();
+function sort_queue(a, b)
+{
+  if( a.priority < b.priority ) return -1;
+  else if( a.priority == b.priority ) return 0;
+  else return 1;
+}
+function execute_ez_queue()
+{
+  ez_queue.sort( sort_queue );
+
+  for( var i in ez_queue )
+  {
+        if(typeof ez_queue[i].method != "undefined")
+        {
+            try{
+                ez_queue[i].method.call( null );
+            }
+            catch (err) {
+
+            }
+        }
+  }
+}
+
+window.ez_ad_units = new Array();
+window.ezslots = new Array();
+window.ezsrqt = {};
+function ez_write_tag(d) {
+    if(ez_isclean() && d instanceof Array) {
+        if(typeof ezstandalone !== 'undefined' && typeof ezstandalone.selectedPlaceholders !== 'undefined' && ezstandalone.selectedPlaceholders[d[3]] === true) {
+            return "1+1";
+        }
+        ez_ad_units[ez_ad_units.length] = d;
+        var dve = "";
+        if(typeof d[5] != 'undefined' && d[5] > 0){dve = '_'+d[5];}
+        var ezcmd = "googletag.cmd.push(function() {var divid = 'div-gpt-ad-"+d[1]+"-"+d[4]+""+dve+"';if(typeof ezlrarn == 'function'){ezlrarn(divid);}googletag.display(divid);var to = 0;if("+d[2]+".getTargeting('ga')[0] == '0'){to = 500;console.log('"+d[2]+" - no google');}if(window.ezDisableInitialLoad==true){setTimeout(function(){googletag.pubads().refresh(["+d[2]+"])},to);}});";
+        return ezcmd;
+    }
+
+    return "1+1";
+}
+function in_array(needle, haystack) {
+    var length = haystack.length;
+    for(var i = 0; i < length; i++) {
+        if(haystack[i] == needle) return true;
+    }
+    return false;
+}
+</script><script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">var ezrpos = new Array();var ez_current_interval;var ez_current_load = 0;</script><script data-cfasync="false" type="text/javascript" data-pagespeed-no-defer="" src="./An Introduction to GCC - Floating-point issues_files/dall2143.js.download" async=""></script><script data-cfasync="false" type="text/javascript" data-pagespeed-no-defer="">
+var epbjs=epbjs||{};function epbjsRequestAdUnits(e){epbjs.que.push(function(){for(var s=0;s<e.length;s++)epbjs.ezAdUnits.push(e[s]);epbjs.addAdUnits(e),epbjs.requestBids({bidsBackHandler:function(e){"function"==typeof window.ezosethbbids?window.ezosethbbids(e):window.ezosethbbidsInterval=setInterval(function(e){"function"==typeof ezosethbbids&&ezosethbbids(e)},20,e)}})})}function epbjsRefreshSlot(e){epbjs.que.push(function(){epbjs.requestBids({adUnitCodes:[e.getSlotElementId()],bidsBackHandler:function(e){epbjs.fastLoadAuctionEnd=!0,window.ezosethbbids(e)}})})}epbjs.bidderTimeout=2000,epbjs.useAdj=true,epbjs.ezAdUnits=epbjs.ezAdUnits||[],epbjs.que=epbjs.que||[],epbjs.ezdss=epbjs.ezdss||[],epbjs.ezas=epbjs.ezas||[],epbjs.ezobid=epbjs.ezobid||[],epbjs.SS={"aol":10028,"criteo":10050,"districtm":10035,"oftmedia":10081,"pulsepoint":10019,"sovrn":10017},epbjs.bidders=['sovrn','openx','pulsepoint','defymedia','aol','conversant','districtm','admedia','emx_digital','sonobi','criteo','ix','cox','audienceNetwork','pubmatic','rubicon','gumgum','oftmedia','lockerdome','triplelift','emx_digital','justpremium','teads','onemobile','yieldlab','unruly'],epbjs.que.push(function(){epbjs.aliasBidder('appnexus', 'districtm');epbjs.aliasBidder('appnexus', 'oftmedia');}),epbjs.que.push(function(){epbjs.setConfig({priceGranularity:{buckets:[{precision:2,min:0,max:5,increment:.01},{precision:2,min:5,max:50,increment:.1},{precision:2,min:50,max:120,increment:5}]},userSync:{filterSettings:{iframe:{bidders:"*",filter:"include"}}}}),epbjs.bidderSettings={districtm: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.800000; var adj2 = adj1 * 1.200000; return adj2; }},sovrn: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.850000; var adj2 = adj1 * 1.200000; return adj2; }},pulsepoint: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.750000; var adj2 = adj1 * 1.200000; return adj2; }},oftmedia: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.900000; var adj2 = adj1 * 1.200000; return adj2; }},aol: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.910000; var adj2 = adj1 * 1.200000; return adj2; }},criteo: { bidCpmAdjustment: function(bidCpm) { var adj1 = bidCpm * 0.720000; var adj2 = adj1 * 1.200000; return adj2; }}, standard:{adserverTargeting:[{key:"epb",val:function(e){return e.bidderCode}},{key:"epa",val:function(e){return e.adId}},{key:"epp",val:function(e){return e.pbCg}},{key:"epf",val:function(e){return e.mediaType}},{key:"eps",val:function(e){return"ehb"==e.bidder?0:void 0!==epbjs.SS[e.bidder.toLowerCase()]?epbjs.SS[e.bidder.toLowerCase()]:(console.error("epbjs: NO MATCH"),0)}}]}},epbjs.onEvent("bidWon",function(e){epbjs.ezas[e.adUnitCode]=e.size,"ehb"==e.bidder?epbjs.ezdss[e.adUnitCode]=e.ss:void 0!==epbjs.SS[e.bidder.toLowerCase()]?(epbjs.ezdss[e.adUnitCode]=epbjs.SS[e.bidder.toLowerCase()],1==epbjs.useAdj&&epbjs.bidders.indexOf(e.bidder)>-1&&(epbjs.ezobid[e.adUnitCode]=e.cpm/1.200000)):console.error("epbjs: NO MATCH")})});epbjsRequestAdUnits([{code: 'div-gpt-ad-linuxtopia_org-large-leaderboard-1-0', mediaTypes: {banner: { sizes:[[160,600]] }, video: {context:'outstream',playerSize:[[160, 600]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365505' }},{bidder: 'sovrn', params: { tagid: '593706'}},{bidder: 'pulsepoint', params: { cf: '160X600', cp: 560269, ct: 472595 }},{bidder: 'aol',params: { placement: '4308141', network: '10765.1' }},{bidder: 'oftmedia', params:{ placementId: '11660678' }},{bidder: 'districtm', params: { placementId: '10582056' }}] },{code: 'div-gpt-ad-linuxtopia_org-medrectangle-1-0', mediaTypes: {banner: { sizes:[[970,90],[728,90]] }, video: {context:'outstream',playerSize:[[970, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365430' }},{bidder: 'sovrn', params: { tagid: '593627'}},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'pulsepoint', params: { cf: '970X90', cp: 560269, ct: 472609 }},{bidder: 'oftmedia', params:{ placementId: '14490042' }},{bidder: 'aol',params: { placement: '5020635', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-box-2-0', mediaTypes: {banner: { sizes:[[728,90]] }, video: {context:'outstream',playerSize:[[728, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365392' }},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'sovrn', params: { tagid: '593590'}},{bidder: 'pulsepoint', params: { cf: '728X90', cp: 560269, ct: 472601 }},{bidder: 'oftmedia', params:{ placementId: '11660801' }},{bidder: 'aol',params: { placement: '4308144', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-large-billboard-2-0', mediaTypes: {banner: { sizes:[[160,600]] }, video: {context:'outstream',playerSize:[[160, 600]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365496' }},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'sovrn', params: { tagid: '593695'}},{bidder: 'pulsepoint', params: { cf: '160X600', cp: 560269, ct: 472595 }},{bidder: 'oftmedia', params:{ placementId: '11660678' }},{bidder: 'aol',params: { placement: '4308141', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-large-leaderboard-1-0', mediaTypes: {banner: { sizes:[[160,600]] }, video: {context:'outstream',playerSize:[[160, 600]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365505' }},{bidder: 'pulsepoint', params: { cf: '160X600', cp: 560269, ct: 472595 }},{bidder: 'oftmedia', params:{ placementId: '11660678' }},{bidder: 'aol',params: { placement: '4308141', network: '10765.1' }},{bidder: 'sovrn', params: { tagid: '593706'}},{bidder: 'districtm', params: { placementId: '10582056' }}] },{code: 'div-gpt-ad-linuxtopia_org-box-3-0', mediaTypes: {banner: { sizes:[[970,90],[728,90]] }, video: {context:'outstream',playerSize:[[970, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365408' }},{bidder: 'sovrn', params: { tagid: '593605'}},{bidder: 'oftmedia', params:{ placementId: '14490040' }},{bidder: 'pulsepoint', params: { cf: '970X90', cp: 560269, ct: 472609 }},{bidder: 'aol',params: { placement: '5020619', network: '10765.1' }},{bidder: 'districtm', params: { placementId: '10582056' }}] },{code: 'div-gpt-ad-linuxtopia_org-medrectangle-1-0', mediaTypes: {banner: { sizes:[[970,90],[728,90]] }, video: {context:'outstream',playerSize:[[970, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365430' }},{bidder: 'sovrn', params: { tagid: '593627'}},{bidder: 'pulsepoint', params: { cf: '970X90', cp: 560269, ct: 472609 }},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'oftmedia', params:{ placementId: '14490042' }},{bidder: 'aol',params: { placement: '5020635', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-box-2-0', mediaTypes: {banner: { sizes:[[728,90]] }, video: {context:'outstream',playerSize:[[728, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365392' }},{bidder: 'pulsepoint', params: { cf: '728X90', cp: 560269, ct: 472601 }},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'sovrn', params: { tagid: '593590'}},{bidder: 'oftmedia', params:{ placementId: '11660801' }},{bidder: 'aol',params: { placement: '4308144', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-large-billboard-2-0', mediaTypes: {banner: { sizes:[[160,600]] }, video: {context:'outstream',playerSize:[[160, 600]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365496' }},{bidder: 'pulsepoint', params: { cf: '160X600', cp: 560269, ct: 472595 }},{bidder: 'sovrn', params: { tagid: '593695'}},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'oftmedia', params:{ placementId: '11660678' }},{bidder: 'aol',params: { placement: '4308141', network: '10765.1' }}] },{code: 'div-gpt-ad-linuxtopia_org-box-3-0', mediaTypes: {banner: { sizes:[[970,90],[728,90]] }, video: {context:'outstream',playerSize:[[970, 90]]}}, bids: [{bidder: 'criteo', params: { zoneId: '1365408' }},{bidder: 'pulsepoint', params: { cf: '970X90', cp: 560269, ct: 472609 }},{bidder: 'sovrn', params: { tagid: '593605'}},{bidder: 'districtm', params: { placementId: '10582056' }},{bidder: 'aol',params: { placement: '5020619', network: '10765.1' }},{bidder: 'oftmedia', params:{ placementId: '14490040' }}] }]);</script><script type="text/javascript" data-ezscrex="false">var ezorbf = []; </script><script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.isEZABL=false;window.ezmadspc=300;window.ezoViewCheck = false;</script><script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.ezDisableInitialLoad=false;</script><script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
+window.googletag = window.googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//securepubads.g.doubleclick.net/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+<script data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">
+googletag.cmd.push(function() {googletag.destroySlots();if(typeof window.isEZABL == 'undefined' || window.isEZABL != true) {ezslot_0 = googletag.defineSlot('/1254144/linuxtopia_org-box-3',[970,90],'div-gpt-ad-linuxtopia_org-box-3-0').addService(googletag.pubads()).setTargeting('iid14','1305498').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1102').setTargeting('sap','1102').setTargeting('a','|251|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','0').setTargeting('reft','tf').setTargeting('refs','30').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','2').setTargeting('al','1002').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-box-3-1305498').setTargeting('eb_br','736e09a0771285737509ab8954c475a7').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','2').setCollapseEmptyDiv(false).setTargeting('br1','1200').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','33').setTargeting('deal1',[21,22,23,24,25,26,27,28,29,30,16]);ezslot_0.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','0C9C11').set('adsense_text_color','000000').set('adsense_url_color','0C9C11');ezrpos[0]="0";ezslot_2 = googletag.defineSlot('/1254144/linuxtopia_org-box-2',[728,90],'div-gpt-ad-linuxtopia_org-box-2-0').addService(googletag.pubads()).setTargeting('iid13','1266198').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1106').setTargeting('sap','1106').setTargeting('a','|2|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','2').setTargeting('reft','n').setTargeting('refs','30').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','1').setTargeting('al','1001').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-box-2-1266198').setTargeting('eb_br','b2ac58e6c0c84fc65f344f47dd85768b').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','2').setTargeting('acptad','1').setCollapseEmptyDiv(false).setTargeting('br1','2100').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','24').setTargeting('deal1',[22,23,24,25,26,27,28,29,30]);ezslot_2.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','37a5d7').set('adsense_text_color','000000').set('adsense_url_color','F0F0F0');ezrpos[2]="2";ezslot_3 = googletag.defineSlot('/1254144/linuxtopia_org-large-billboard-2',[160,600],'div-gpt-ad-linuxtopia_org-large-billboard-2-0').addService(googletag.pubads()).setTargeting('iid13','1295898').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1104').setTargeting('sap','1104').setTargeting('a','|251|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','3').setTargeting('reft','tf').setTargeting('refs','120').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','0').setTargeting('al','1034').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-large-billboard-2-1295898').setTargeting('eb_br','2620dac3b050a8e36c132f49cccab5a1').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','2').setCollapseEmptyDiv(false).setTargeting('br1','2200').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','32').setTargeting('deal1',[22,23,24,25,26,27,28,29,30]);ezslot_3.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','0C9C11').set('adsense_text_color','000000').set('adsense_url_color','0C9C11');ezrpos[3]="3";ezslot_1 = googletag.defineSlot('/1254144/linuxtopia_org-medrectangle-1',[970,90],'div-gpt-ad-linuxtopia_org-medrectangle-1-0').addService(googletag.pubads()).setTargeting('iid13','1280598').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1103').setTargeting('sap','1103').setTargeting('a','|6|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','1').setTargeting('reft','n').setTargeting('refs','120').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','4').setTargeting('al','1004').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-medrectangle-1-1280598').setTargeting('eb_br','39abb99448d54704c4afa42efe76e15d').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','1').setTargeting('acptad','1').setCollapseEmptyDiv(false).setTargeting('br1','1100').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','25').setTargeting('deal1',[21,22,23,24,25,26,27,28,29,30,16]);ezslot_1.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','858585').set('adsense_text_color','000000').set('adsense_url_color','F0F0F0');ezrpos[1]="1";ezslot_4 = googletag.defineSlot('/1254144/linuxtopia_org-large-leaderboard-1',[160,600],'div-gpt-ad-linuxtopia_org-large-leaderboard-1-0').addService(googletag.pubads()).setTargeting('iid13','1295898').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1105').setTargeting('sap','1105').setTargeting('a','|6|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','4').setTargeting('reft','n').setTargeting('refs','30').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','0').setTargeting('al','1035').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-large-leaderboard-1-1295898').setTargeting('eb_br','b2ac58e6c0c84fc65f344f47dd85768b').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','18').setCollapseEmptyDiv(false).setTargeting('br1','2100').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','40').setTargeting('deal1',[22,23,24,25,26,27,28,29,30]);ezslot_4.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','858585').set('adsense_text_color','000000').set('adsense_url_color','F0F0F0');ezrpos[4]="4";}else{window.ezHideLocations=[];window.ezHideLocations.push('div-gpt-ad-linuxtopia_org-box-3-0');ezslot_2 = googletag.defineSlot('/1254144/linuxtopia_org-box-2',[728,90],'div-gpt-ad-linuxtopia_org-box-2-0').addService(googletag.pubads()).setTargeting('iid13','1266198').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1106').setTargeting('sap','1106').setTargeting('a','|2|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','2').setTargeting('reft','n').setTargeting('refs','30').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','1').setTargeting('al','1001').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-box-2-1266198').setTargeting('eb_br','b2ac58e6c0c84fc65f344f47dd85768b').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','2').setTargeting('acptad','1').setCollapseEmptyDiv(false).setTargeting('br1','2100').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','24').setTargeting('deal1',[22,23,24,25,26,27,28,29,30]);ezslot_2.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','37a5d7').set('adsense_text_color','000000').set('adsense_url_color','F0F0F0');ezrpos[2]="2";window.ezHideLocations.push('div-gpt-ad-linuxtopia_org-large-billboard-2-0');ezslot_1 = googletag.defineSlot('/1254144/linuxtopia_org-medrectangle-1',[970,90],'div-gpt-ad-linuxtopia_org-medrectangle-1-0').addService(googletag.pubads()).setTargeting('iid13','1280598').setTargeting('t','134').setTargeting('d','31310').setTargeting('t1','134').setTargeting('pvc','2').setTargeting('ap','1103').setTargeting('sap','1103').setTargeting('a','|6|').setTargeting('as','revenue').setTargeting('plat','1').setTargeting('bra','mod21').setTargeting('ic','1').setTargeting('at','mbf').setTargeting('adr','399').setTargeting('ezosn','1').setTargeting('reft','n').setTargeting('refs','120').setTargeting('ga','2497208').setTargeting('gala','2709606').setTargeting('rid','99998').setTargeting('pt','4').setTargeting('al','1004').setTargeting('compid','0').setTargeting('tap','linuxtopia_org-medrectangle-1-1280598').setTargeting('eb_br','39abb99448d54704c4afa42efe76e15d').setTargeting('eba','1').setTargeting('ebss','10017').setTargeting('bv','1').setTargeting('acptad','1').setCollapseEmptyDiv(false).setTargeting('br1','1100').setTargeting('br2','0').setTargeting('ezoic','1').setTargeting('stl','25').setTargeting('deal1',[21,22,23,24,25,26,27,28,29,30,16]);ezslot_1.set('adsense_background_color','FFFFFF').set('adsense_border_color','FFFFFF').set('adsense_channel_ids','6348624313').set('adsense_link_color','858585').set('adsense_text_color','000000').set('adsense_url_color','F0F0F0');ezrpos[1]="1";window.ezHideLocations.push('div-gpt-ad-linuxtopia_org-large-leaderboard-1-0');}googletag.pubads().addEventListener('slotRenderEnded', function(event) { __ez.queue.addFunc("ezbanger", "ezbanger", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('impressionViewable', function(event) { __ez.queue.addFunc("ezvb", "ezvb", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotResponseReceived', function(event) { __ez.queue.addFunc("ezsr", "ezsr", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotRequested', function(e) { window.ezsrqt[e.slot.getSlotElementId()] = Date.now();});googletag.pubads().enableLazyLoad({fetchMarginPercent: 400,renderMarginPercent: 250,mobileScaling: 2.0});googletag.enableServices();});window.ezoll = true;window.ezoadxnc = '1254144';var ezoibfh = Array();ezoibfh[0] = 'zero';ezoibfh[1000000] = 'off';ezoibfh[260] = '57914c3716312cb7e954090f0717ea25';
+ezoibfh[1900] = '65b2c11be72ed8610e2ac0304f3023a9';
+ezoibfh[950] = 'c410f2a2b0c2123f4b6651cda6c5cf53';
+ezoibfh[650] = '5bac35e1a3b6adc56da706000a645484';
+ezoibfh[1100] = '39abb99448d54704c4afa42efe76e15d';
+ezoibfh[750] = '6ac330e431a70c7d8ce9fb95aee95c72';
+ezoibfh[700] = '8b07bae800b215e481d05a271b3e723b';
+ezoibfh[550] = '26dfa00588543c52511429ade391f561';
+ezoibfh[240] = '8de2c8ca79e8623e3cb37120a35ebaa2';
+ezoibfh[2200] = '2620dac3b050a8e36c132f49cccab5a1';
+ezoibfh[2000] = '12a3b3570adcf20fd41a00445219acaa';
+ezoibfh[1500] = 'd81e229576f8cb8a43ff5c6a8e596727';
+ezoibfh[100] = 'a495ce7dbb4cefcd3e0a722048894f41';
+ezoibfh[60] = 'c352ba581bd3ffd8cea608cf2d55f519';
+ezoibfh[10] = '291d27313eb66c50243129b23df8a579';
+ezoibfh[200] = '86802a923a1f32517e4c5d3b6d550271';
+ezoibfh[180] = '9ae587f95e95c876b7b76fd4c72a3838';
+ezoibfh[140] = 'af063c244089b52ec5a0423a258f1f8e';
+ezoibfh[850] = '5297de5240aa45da173a0792747e0d26';
+ezoibfh[450] = '6e85b37de1b1ffc2593baa5d6e4b02fc';
+ezoibfh[280] = 'c16fac08e79a971524b1c6834f5caad3';
+ezoibfh[1600] = '6dbaa2f5e27e83e2fcd15988d9095988';
+ezoibfh[1300] = 'bfa042bdb1583c959161b7823290dc1f';
+ezoibfh[1000] = 'c5429b6ddd929d0bc40a832a87789a7c';
+ezoibfh[400] = '76163170a8636ae5b88417f095893e08';
+ezoibfh[300] = '90c3c48d0172916d27c102ea4aa9d49c';
+ezoibfh[220] = '43aa1607a0c08c74b14a9039e7b909b4';
+ezoibfh[20] = '7432360301409ae695ba255f16fbcf06';
+ezoibfh[2100] = 'b2ac58e6c0c84fc65f344f47dd85768b';
+ezoibfh[1800] = '72c13a89ac876aaffdde39253459460b';
+ezoibfh[900] = 'eeb0e32289ff31f9ddef18331038e5e9';
+ezoibfh[350] = '9e0a1ce5b2455cb9b48d5df4c6bf4053';
+ezoibfh[70] = '527e52c10635ac8136a4c84094ee49a8';
+ezoibfh[80] = 'dfa60cee6e1053fc0c9e607c8047bd28';
+ezoibfh[600] = '45a351e981f435b4c20fafca8a5d741c';
+ezoibfh[500] = '5f2b94bb26a5aa9b1a00e66d30cfd5ec';
+ezoibfh[160] = '3530fcb6bcc13dc3c1712eaef7d92700';
+ezoibfh[40] = 'ee685f77592ce296910ee91457d66ba3';
+ezoibfh[1400] = '04b5efc3207e2390972f099a6a3c4757';
+ezoibfh[800] = 'dc3573d5dc41abdf97751be02f53537f';
+ezoibfh[50] = '3ba982fc4238dd4197b1d51b345478dc';
+ezoibfh[90] = 'b355e9227b551c119a30a68852723b62';
+ezoibfh[30] = '54d0fa6d5f6aabe7623cb24faa42a441';
+ezoibfh[1700] = 'ff69c327c284033fca821ae81630bfa9';
+ezoibfh[1200] = '736e09a0771285737509ab8954c475a7';
+ezoibfh[120] = '58ef7bddb438af5e257c4377f32c243a';
+if(typeof window.isEZABL == 'undefined' || window.isEZABL != true) {ezslots.push("ezslot_0");ezslots.push("ezslot_2");ezslots.push("ezslot_3");ezslots.push("ezslot_1");ezslots.push("ezslot_4");}else{ezslots.push("ezslot_2");ezslots.push("ezslot_1");}</script>
+<script data-cfasync="false" data-pagespeed-no-defer="">var __ez=__ez||{};__ez.evt={};__ez.script={};__ez.ck={};__ez.template={};__ez.template.isOrig=false;__ez.evt.add=function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n()},__ez.evt.remove=function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent?e.detachEvent("on"+t,n):delete e["on"+t]};__ez.ck.get=function(e,n){null!==n&&(e=e+"_"+n);for(var o=e+"=",t=decodeURIComponent(document.cookie).split(";"),i=0;i<t.length;i++){for(var c=t[i];" "===c.charAt(0);)c=c.substring(1);if(0===c.indexOf(o))return c.substring(o.length,c.length)}return""},__ez.ck.setByCat=function(e,n){if(-1===e.indexOf("path=")&&(e+="; path=/"),"undefined"!=typeof cmpIsOn){if(null!=n){var o=__ez.ck.get("ezCMPCookieConsent",null);-1!==(o=o.substring(1,o.length)).indexOf(n+"=1")?document.cookie=e:""===o&&"undefined"!=typeof cmpCookies&&(void 0===cmpCookies[n]&&(cmpCookies[n]=[]),cmpCookies[n].push(e))}}else document.cookie=e};__ez.queue=function(){var e=0,i=0,n=[],t=!1,r=[],s=[],o=!0,a={func:function(e,i,t,r,s,o,a){var l=this;this.name=e,this.funcName=i,this.parameters=null===t?null:t instanceof Array?t:[t],this.isBlock=r,this.blockedBy=s,this.deleteWhenComplete=o,this.isError=!1,this.isComplete=!1,this.isInitialized=!1,this.proceedIfError=a,this.isTimeDelay=!1,this.process=function(){d("... func = "+e),l.isInitialized=!0,l.isComplete=!0;var i=l.funcName.split(".");i.length>3||(3===i.length?window[i[0]][i[1]][i[2]].apply(null,this.parameters):2===i.length?window[i[0]][i[1]].apply(null,this.parameters):window[l.funcName].apply(null,this.parameters)),!0===l.deleteWhenComplete&&delete n[e],!0===l.isBlock&&(d("----- F'D: "+l.name),f())}},file:function(e,i,n,t,r,s,o){var a=this;this.name=e,this.path=i,this.async=r,this.defer=s,this.isBlock=n,this.blockedBy=t,this.isInitialized=!1,this.isError=!1,this.isComplete=!1,this.proceedIfError=o,this.isTimeDelay=!1,this.process=function(){a.isInitialized=!0,d("... file = "+e);var n=document.createElement("script");n.src=i,!0===r?n.async=!0:!0===s&&(n.defer=!0),n.onerror=function(){d("----- ERR'D: "+a.name),a.isError=!0,!0===a.isBlock&&f()},n.onreadystatechange=n.onload=function(){var e=n.readyState;d("----- F'D: "+a.name),e&&!/loaded|complete/.test(e)||(a.isComplete=!0,!0===a.isBlock&&f())},document.getElementsByTagName("head")[0].appendChild(n)}}};function l(e){!0!==c(e)&&0!=o&&e.process()}function c(e){if(!0===e.isTimeDelay&&!1===t)return d(e.name+" blocked = TIME DELAY!"),!0;if(e.blockedBy instanceof Array)for(var i=0;i<e.blockedBy.length;i++){var r=e.blockedBy[i];if(!1===n.hasOwnProperty(r))return d(e.name+" blocked = "+r),!0;if(!0===e.proceedIfError&&!0===n[r].isError)return!1;if(!1===n[r].isComplete)return d(e.name+" blocked = "+r),!0}return!1}function d(e){var i=window.location.href,n=new RegExp("[?&]ezq=([^&#]*)","i").exec(i);"1"===(n?n[1]:null)&&console.debug(e)}function f(){++e>200||(d("let's go"),u(r),u(s))}function u(e){for(var i in e)if(!1!==e.hasOwnProperty(i)){var n=e[i];!0===n.isComplete||c(n)||!0===n.isInitialized||!0===n.isError?!0===n.isError?d(n.name+": error"):!0===n.isComplete?d(n.name+": complete already"):!0===n.isInitialized&&d(n.name+": initialized already"):n.process()}}return window.addEventListener("load",function(){setTimeout(function(){t=!0,d("TDELAY -----"),f()},5e3)},!1),{addFile:function(e,i,t,o,c,d,f,u){var h=new a.file(e,i,t,o,c,d,f);!0===u?r[e]=h:s[e]=h,n[e]=h,l(h)},addDelayFile:function(e,i){var t=new a.file(e,i,!1,[],!1,!1,!0);t.isTimeDelay=!0,d(e+" ...  FILE! TDELAY"),s[e]=t,n[e]=t,l(t)},addFunc:function(e,t,o,c,d,f,u,h,m){!0===f&&(e=e+"_"+i++);var p=new a.func(e,t,o,c,d,u,h);!0===m?r[e]=p:s[e]=p,n[e]=p,l(p)},addDelayFunc:function(e,i,t){var r=new a.func(e,i,t,!1,[],!0,!0);r.isTimeDelay=!0,d(e+" ...  FUNCTION! TDELAY"),s[e]=r,n[e]=r,l(r)},items:n,processAll:f,setallowLoad:function(e){o=e}}}();__ez.script.add=function(e){var t=document.createElement("script");t.src=e,t.async=!0,t.type="text/javascript",document.getElementsByTagName("head")[0].appendChild(t)};__ez.script.inline=function(e){var n=document.createElement("script"),t=document.createTextNode(e.innerHTML);n.appendChild(t),document.body.appendChild(n)};</script>
+<script type="text/javascript" data-cfasync="false">var _ezaq = {"ad_cache_level":0,"ad_location_ids":"2,4,1,34,35","ad_transform_level":0,"adx_ad_count":5,"bidder_version":3,"city":"Kalamazoo","country":"US","days_since_last_visit":-1,"display_ad_count":5,"domain_id":31310,"ds_adsize_opt_id":-1,"engaged_time_visit":0,"ezcache_level":0,"forensiq_score":-1,"form_factor_id":1,"framework_id":1,"has_bad_image":0,"has_bad_words":0,"iab_category":"","is_from_recommended_pages":false,"is_return_visitor":false,"last_page_load":"","last_pageview_id":"","lt_cache_level":0,"max_ads":7,"metro_code":563,"page_ad_positions":"1102,1103,1104,1105,1106","page_view_count":2,"page_view_id":"3567450a-b30e-4e40-7652-4650f62caa98","position_selection_id":16,"postal_code":"49008","pv_event_count":0,"response_time_orig":143,"serverid":"3.93.77.46:4871","state":"MI","sub_page_ad_positions":"1102,1103,1104,1105,1106","t_epoch":1570911983,"template_id":134,"time_on_site_visit":0,"url":"https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html","user_id":0,"word_count":795,"worst_bad_word_level":0};var _ezim_d = {"linuxtopia_org-box-2":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"linuxtopia_org-box-2/2019-10-12/1266198","height":"90","position_id":1106,"sub_position_id":1106,"width":"728"},"linuxtopia_org-box-3":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"linuxtopia_org-box-3/2019-10-12/1305498","height":"90","position_id":1102,"sub_position_id":1102,"width":"970"},"linuxtopia_org-large-billboard-2":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"linuxtopia_org-large-billboard-2/2019-10-12/1295898","height":"600","position_id":1104,"sub_position_id":1104,"width":"160"},"linuxtopia_org-large-leaderboard-1":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"linuxtopia_org-large-leaderboard-1/2019-10-12/1295898","height":"600","position_id":1105,"sub_position_id":1105,"width":"160"},"linuxtopia_org-medrectangle-1":{"adsense_stat_source_id":5,"adx_ad_count":5,"adx_stat_source_id":35,"full_id":"linuxtopia_org-medrectangle-1/2019-10-12/1280598","height":"90","position_id":1103,"sub_position_id":1103,"width":"970"}};var _ezat = {"domain_id":31310,"form_factor_id":1,"framework_id":1,"pageview_date":"2019-10-12","pageview_id":"3567450a-b30e-4e40-7652-4650f62caa98","template_id":134,"url":"https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html","visit_uuid":"f13816d9-10e9-4457-547d-9a30d0f445b5"};</script><script data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript">__ez.queue.addFile('banger.js', '/porpoiseant/banger.js?cb=187-1&bv=60&v=30&PageSpeed=off', true, [], true, false, false, true);</script><script src="./An Introduction to GCC - Floating-point issues_files/banger.js.download" async=""></script>
+<script type="text/javascript">(function(){function a(g,h,i){var j=new Date;j.setTime(j.getTime()+1e3*(60*(60*(24*i))));var k="expires="+j.toUTCString(),l=g+"="+h+";"+k+";path=/;";"undefined"!=typeof ezdomain&&(l+="domain="+ezdomain),document.cookie=l}var b=window.addEventListener?"addEventListener":"attachEvent",c=window[b],f="attachEvent"==b?"onmessage":"message";c(f,function(g){"undefined"!=typeof g.data.ezstatus&&(__ez.bit.AddAndFire(_ezaq.page_view_id,[new __ezDotData("dg",g.data.ezstatus)]),a("ezdg",g.data.ezstatus,730))})})();</script>
+<script data-cfasync="false" data-pagespeed-no-defer="">__ez.dot={};var __ezDotData=function(e,t){"string"!=typeof e&&2==e.length&&(t=e[1],e=e[0]),this.name=e,this.val=t};__ez.dot.b64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t,r,n,o,i,d,a,_="",f=0;for(e=Base64._utf8_encode(e);f<e.length;)o=(t=e.charCodeAt(f++))>>2,i=(3&t)<<4|(r=e.charCodeAt(f++))>>4,d=(15&r)<<2|(n=e.charCodeAt(f++))>>6,a=63&n,isNaN(r)?d=a=64:isNaN(n)&&(a=64),_=_+this._keyStr.charAt(o)+this._keyStr.charAt(i)+this._keyStr.charAt(d)+this._keyStr.charAt(a);return _},decode:function(e){var t,r,n,o,i,d,a="",_=0;for(e=e.replace(/[^A-Za-z0-9+/=]/g,"");_<e.length;)t=this._keyStr.indexOf(e.charAt(_++))<<2|(o=this._keyStr.indexOf(e.charAt(_++)))>>4,r=(15&o)<<4|(i=this._keyStr.indexOf(e.charAt(_++)))>>2,n=(3&i)<<6|(d=this._keyStr.indexOf(e.charAt(_++))),a+=String.fromCharCode(t),64!=i&&(a+=String.fromCharCode(r)),64!=d&&(a+=String.fromCharCode(n));return a=Base64._utf8_decode(a)},_utf8_encode:function(e){e=e.replace(/rn/g,"n");for(var t="",r=0;r<e.length;r++){var n=e.charCodeAt(r);n<128?t+=String.fromCharCode(n):(127<n&&n<2048?t+=String.fromCharCode(n>>6|192):(t+=String.fromCharCode(n>>12|224),t+=String.fromCharCode(n>>6&63|128)),t+=String.fromCharCode(63&n|128))}return t},_utf8_decode:function(e){for(var t="",r=0,n=c1=c2=0;r<e.length;)(n=e.charCodeAt(r))<128?(t+=String.fromCharCode(n),r++):191<n&&n<224?(c2=e.charCodeAt(r+1),t+=String.fromCharCode((31&n)<<6|63&c2),r+=2):(c2=e.charCodeAt(r+1),c3=e.charCodeAt(r+2),t+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),r+=3);return t}},__ez.dot.dataToStr=function(e){if(void 0===e)return[];try{for(var t in e)e[t].val=e[t].val+""}catch(e){}return e},__ez.dot.getCC=function(){var e="XX";return"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("country")&&(e=_ezaq.country),e},__ez.dot.getDID=function(){var e="0";return"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("domain_id")&&(e=_ezaq.domain_id.toString()),e},__ez.dot.getEpoch=function(e){return"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("t_epoch")&&(e=_ezaq.t_epoch),e},__ez.dot.getPageviewId=function(){var e="";return"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("page_view_id")&&(e=_ezaq.page_view_id),e},__ez.dot.getURL=function(e){return("undefined"!=typeof ezJsu&&1==ezJsu||"undefined"!=typeof _ez_sa&&1==_ez_sa||"undefined"!=typeof isAmp&&!0===isAmp||"undefined"!=typeof ezWp&&!0===ezWp)&&(e="//g.ezoic.net"+e),e},__ez.dot.isValid=function(e){for(var t=0;t<e.length;t++)if(e[t]instanceof __ezDotData==!1)return console.error("Invalid data. ",e[t]),!1;return!0},__ez.dot.isDefined=function(){for(var e=0;e<arguments.length;e++)if(null==arguments[e])return console.error("Argument not defined. ",arguments),!1;return!0},__ez.dot.isAnyDefined=function(){for(var e=!1,t=0;t<arguments.length;t++)null!=arguments[t]&&(e=!0);return 0==e&&console.error("isAnyDefined Arguments not defined. ",arguments),e},__ez.dot.getSlotIID=function(e){var t="0";try{var r=__ez.dot.getTargetingMap(e);if(-1===__ez.dot.getElementId(e).indexOf("div-gpt-ad"))return t;if(void 0!==r)for(var n in r)if(-1!==n.indexOf("iid")&&void 0!==r[n][0]){t=r[n][0];break}}catch(e){}return t},__ez.dot.getElementId=function(e){return void 0!==e.ElementId?e.ElementId:e.getSlotElementId()},__ez.dot.getAdUnitPath=function(e){return void 0!==e.AdUnitPath?e.AdUnitPath:e.getAdUnitPath()},__ez.dot.getSizes=function(e){return void 0!==e.Sizes?e.Sizes:e.getSizes()},__ez.dot.getTargeting=function(e,t){return void 0!==e.Targeting?e.Targeting[t]:e.getTargeting(t)[0]},__ez.dot.getTargetingMap=function(e){return void 0!==e.Targeting?e.Targeting:e.getTargetingMap()},__ez.dot.getAdUnit=function(e){return!0===__ez.template.isOrig?__ez.dot.getAdUnitPath(e).split("/").pop():__ez.dot.getElementId(e)};__ez.bit=function(){function c(a,b){d(a,b),e()}function d(b,c){__ez.dot.isDefined(b)&&__ez.dot.isValid(c)&&a.push({type:"pageview",pageview_id:b,domain_id:__ez.dot.getDID(),t_epoch:__ez.dot.getEpoch(0),data:__ez.dot.dataToStr(c)})}function e(){void 0!==document.visibilityState&&"prerender"===document.visibilityState||(__ez.dot.isDefined(a)&&a.length>0&&((new Image).src=__ez.dot.getURL(b)+"?orig="+(!0===__ez.template.isOrig?1:0)+"&ds="+btoa(JSON.stringify(a))),a=[])}var a=[],b="/detroitchicago/greenoaks.gif";return{Add:d,AddAndFire:c,Fire:e}}();</script><script data-cfasync="false" data-pagespeed-no-defer="">__ez.pel=function(){var u=[],i="/porpoiseant/army.gif";function t(e,i,t,_,d,o,n){if(__ez.dot.isDefined(e)&&0!=__ez.dot.isAnyDefined(e.getSlotElementId,e.ElementId)){var r=parseInt(__ez.dot.getTargeting(e,"ap")),a=__ez.dot.getSlotIID(e),s=__ez.dot.getAdUnit(e),p=parseInt(__ez.dot.getTargeting(e,"compid")),z=0,f=0,g=function(e){if("undefined"==typeof _ezim_d)return!1;var i=__ez.dot.getAdUnitPath(e).split("/").pop();if("object"==typeof _ezim_d&&_ezim_d.hasOwnProperty(i))return _ezim_d[i];for(var t in _ezim_d)if(t.split("/").pop()===i)return _ezim_d[t];return!1}(e);"object"==typeof g&&(void 0!==g.creative_id&&(f=g.creative_id),void 0!==g.line_item_id&&(z=g.line_item_id)),__ez.dot.isDefined(a,s)&&__ez.dot.isValid(i)&&u.push({type:"impression",impression_id:a,domain_id:__ez.dot.getDID(),unit:s,t_epoch:__ez.dot.getEpoch(0),revenue:t,est_revenue:_,ad_position:r,ad_size:"",bid_floor_filled:d,bid_floor_prev:o,stat_source_id:n,country_code:__ez.dot.getCC(),pageview_id:__ez.dot.getPageviewId(),comp_id:p,line_item_id:z,creative_id:f,data:__ez.dot.dataToStr(i)})}}function _(){if(void 0===document.visibilityState||"prerender"!==document.visibilityState){if(__ez.dot.isDefined(u)&&0<u.length){var e=__ez.dot.getURL(i)+"?orig="+(!0===__ez.template.isOrig?1:0)+"&sts="+btoa(JSON.stringify(u));void 0!==window.isAmp&&isAmp&&void 0!==window._ezaq&&_ezaq.hasOwnProperty("domain_id")&&(e+="&visit_uuid="+_ezaq.visit_uuid),(new Image).src=e}u=[]}}return{Add:t,AddAndFire:function(e,i){t(e,i,0,0,0,0,0),_()},AddById:function(e,i){var t=e.split("/");if(__ez.dot.isDefined(e)&&3===t.length&&__ez.dot.isValid(i)){var _=t[0],d=t[2];u.push({type:"impression",impression_id:d,domain_id:__ez.dot.getDID(),unit:_,t_epoch:__ez.dot.getEpoch(0),pageview_id:__ez.dot.getPageviewId(),data:__ez.dot.dataToStr(i)})}},Fire:_,GetPixels:function(){return u}}}();var EzoicPixel=function(){this.pixels=[],this.pixelUrl="/ezoic/e.gif",("undefined"!=typeof ezJsu&&!0===ezJsu||"undefined"!=typeof _ez_sa&&!0===_ez_sa||void 0!==window.isAmp&&!0===isAmp||"undefined"!=typeof ezWp&&!0===ezWp)&&(this.pixelUrl="//g.ezoic.net"+this.pixelUrl),this.tEpoch=0,"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("t_epoch")&&(this.tEpoch=_ezaq.t_epoch)},EzoicPixelData=function(e,i){this.name=e,this.val=i};EzoicPixel.prototype={constructor:EzoicPixel,AddAndFireImpPixel:function(e,i){this.AddImpPixel(e,i,0,0,0,0,0),this.FirePixels()},AddAndFirePVPixel:function(e,i){this.AddPVPixel(e,i),this.FirePixels()},AddImpPixel:function(e,i,t,n,o,a,d){if(0!=__ez.dot.isDefined(e)&&0!=__ez.dot.isAnyDefined(e.getSlotElementId,e.ElementId)){var s=parseInt(__ez.dot.getTargeting(e,"ap")),r=__ez.dot.getSizes(e)[0],_=r.l.toString()+"x"+r.j.toString(),p="0",l="XX";"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("domain_id")&&(p=_ezaq.domain_id.toString()),"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("country")&&(l=_ezaq.country);var h=__ez.dot.getSlotIID(e),c=__ez.dot.getSlotElementId(e);__ez.dot.isDefined(h,c)&&this.validateData(i)&&(i=this.convertDataToStr(i),this.pixels.push({type:"impression",impression_id:h,domain_id:p,unit:c,t_epoch:this.tEpoch,revenue:t,est_revenue:n,ad_position:s,ad_size:_,bid_floor_filled:o,bid_floor_prev:a,stat_source_id:d,country_code:l,data:i}))}},AddImpPixelById:function(e,i){var t="0";"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("domain_id")&&(t=_ezaq.domain_id.toString());var n=e.split("/");if(__ez.dot.isDefined(e)&&3===n.length&&this.validateData(i)){var o=n[0],a=n[2];i=this.convertDataToStr(i),this.pixels.push({type:"impression",impression_id:a,domain_id:t,unit:o,t_epoch:this.tEpoch,data:i})}},AddPVPixel:function(e,i){var t="0";"undefined"!=typeof _ezaq&&_ezaq.hasOwnProperty("domain_id")&&(t=_ezaq.domain_id.toString()),__ez.dot.isDefined(e)&&this.validateData(i)&&(i=this.convertDataToStr(i),this.pixels.push({type:"pageview",pageview_id:e,domain_id:t,t_epoch:this.tEpoch,data:i}))},FirePixels:function(){void 0!==document.visibilityState&&"prerender"===document.visibilityState||(__ez.dot.isDefined(this.pixels)&&0<this.pixels.length&&((new Image).src=this.pixelUrl+"?orig="+(!0===__ez.template.isOrig?1:0)+"&pixels="+encodeURIComponent(JSON.stringify(this.pixels))),this.pixels=[])},NewData:function(e,i){return new EzoicPixelData(e,i)},convertDataToStr:function(e){if(void 0===e)return[];try{for(var i in e)e[i].val=e[i].val+""}catch(e){}return e},validateData:function(e){for(var i=0;i<e.length;i++)if(e[i]instanceof EzoicPixelData==!1)return console.error("Invalid pixelData. ",e[i]),!1;return!0}};</script>
+<script data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript">__ez.queue.addFile('rochester.js', '/detroitchicago/rochester.js?cb=187-1&v=8', false, [], true, false, true, true);</script><script src="./An Introduction to GCC - Floating-point issues_files/rochester.js.download" async=""></script>
+<title>An Introduction to GCC - Floating-point issues</title>
+<meta name="keywords" content="gcc, gcc Tutorial, gcc , gcc reference Guide">
+<meta name="description" content="Introduction to GCC">
+<meta name="distribution" content="global">
+<script language="JavaScript" type="text/JavaScript" src="./An Introduction to GCC - Floating-point issues_files/myfreetemplates.js.download"></script>
+<link href="./An Introduction to GCC - Floating-point issues_files/linuxtopia.css" rel="stylesheet" type="text/css">
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://www.linuxtopia.org/linuxtopia.rss">
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-350808-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">
+  // Stop some malicious behaviors...
+   if ( top != self) {      
+    top.location.replace(document.location);
+    alert("iFrame not allowed; click OK to load this page without the iFrame.")
+   }
+   if ( location.search.length > 0 ) {
+    location.search = '' ;
+   }
+  </script>
+<script src="./An Introduction to GCC - Floating-point issues_files/ezosuigeneris.js.download" async=""></script><script src="./An Introduction to GCC - Floating-point issues_files/ezosuigenerisc.js.download" async=""></script><script src="./An Introduction to GCC - Floating-point issues_files/edmonton.webp" async=""></script><script src="./An Introduction to GCC - Floating-point issues_files/jellyfish.webp" async=""></script><script type="text/javascript" src="./An Introduction to GCC - Floating-point issues_files/jquery.min.js.download"></script><style type="text/css">.raInfo,.raac{color:#000;overflow:hidden}.raac{cursor:pointer;border:none;display:block;padding:2px;font-size:13px;text-decoration:none;white-space:nowrap;background-color:#fff}.raacAnim{background-color:rgba(255,255,255,.6);-webkit-transition-duration:.3s;-moz-transition-duration:.3s;-o-transition-duration:.3s;transition-duration:.3s;-webkit-transition-delay:.5s;-moz-transition-delay:.5s;-o-transition-delay:.5s;transition-delay:.5s}.raacAnim:hover{width:80px;background-color:rgba(255,255,255,1);-webkit-transition-duration:.3s;-moz-transition-duration:.3s;-o-transition-duration:.3s;transition-duration:.3s;-webkit-transition-delay:.5s;-moz-transition-delay:.5s;-o-transition-delay:.5s;transition-delay:.5s}.raacRight{border-top-left-radius:5px;border-bottom-left-radius:5px}.raInfo{font-family:Arial,Helvetica,sans-serif;border:1px solid #aaa;width:100%;height:100%;background-color:#fff;font-size:10px;line-height:1.121;-moz-box-shadow:2px 2px 8px #777;-webkit-box-shadow:2px 2px 8px #777;box-shadow:2px 2px 8px #777}.raInfoClose{float:right;cursor:pointer;font-weight:700;font-size:12px;color:#666;text-align:center;padding:0 2px 2px}.raInfoClose:hover{color:#b00}.raInfoClose p{padding:0;margin:6px 0 0}.raInfoTop{margin:5px}.raInfoTop a {text-decoration:underline; }.raInfoRow{text-align:center;padding:6px 0;margin:2px;background:#eee;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}.raInfoRow > span{cursor:pointer;}.raInfoRow > span:hover{text-decoration:underline; color:blue;} .raInfoLink,.raInfoLink:visited{color:#0073a1;text-decoration:none}.raInfoLink:focus,.raInfoLink:hover{color:#0090cd;text-decoration:underline} .raCloseButton{position: absolute; z-index: 2147483647; right: 0px; width:18px; line-height:18px; background: rgba(255,255,255,.9);} .raCloseButton:hover{width:auto; background-color:#FFF;}</style><script src="./An Introduction to GCC - Floating-point issues_files/audins.js.download" async="" type="text/javascript"></script></head><body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="MM_preloadImages(&#39;/images/btn_home_dn.jpg&#39;,&#39;/images/btn_about_dn.jpg&#39;,&#39;/images/btn_contact_dn.jpg&#39;,&#39;/images/btn_products_dn.jpg&#39;,&#39;/images/btn_support_dn.jpg&#39;,&#39;/images/btn_news_dn.jpg&#39;)" data-gr-c-s-loaded="true"><div id="search-div">
+<form action="https://www.linuxtopia.org/SearchResults.html" id="cse-search-box">
+<div>
+<input type="hidden" name="cx" value="partner-pub-7393409044112403:n9o0jl-7n7c">
+<input type="hidden" name="cof" value="FORID:10">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="text" name="q" size="15" placeholder="Custom Search" style="border: 1px solid rgb(126, 157, 185); padding: 2px; background: url(&quot;https://www.google.com/cse/static/images/1x/googlelogo_lightgrey_46x16dp.png&quot;) left center no-repeat rgb(255, 255, 255); text-indent: 48px;">
+<input type="submit" name="sa" value="Search">
+</div>
+<input name="siteurl" type="hidden" value="www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html"><input name="ref" type="hidden" value=""><input name="ss" type="hidden" value=""></form>
+<!--<script type="text/javascript" src="https://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>-->
+</div>
+<style>.ezoic-ad.box-2 { display:inline-block;float:none !important;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:728px; }
+.ezoic-ad.large-billboard-2 { display:inline-block;float:none !important;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:620px;min-width:160px; }
+.ezoic-ad.large-leaderboard-1 { display:inline-block;float:none !important;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:620px;min-width:160px; }
+.ezoic-ad.box-3 { display:inline-block;float:none;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:970px; }
+.ezoic-ad.medrectangle-1 { display:inline-block;float:none;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:970px; }
+.ezoic-ad{display:inline-block;}
+.adtester-container-107{display:none !important}
+.adtester-container-100{display:none !important}
+.adtester-container-101{display:none !important}
+.ezoic-floating-bottom { display: none!important; }</style><link rel="canonical" href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html">
+<script data-cfasync="false" type="text/javascript">window.google_analytics_uacct = "UA-85187682-39";</script>
+<script data-cfasync="false" type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['e._setAccount', 'UA-85187682-39']);
+_gaq.push(['f._setAccount', 'UA-38339005-1']);
+_gaq.push(['e._setDomainName', 'linuxtopia.org']);
+_gaq.push(['f._setDomainName', 'linuxtopia.org']);
+_gaq.push(['e._setCustomVar',1,'template','pub_site',3]);
+_gaq.push(['e._setCustomVar',2,'t','134',3]);
+_gaq.push(['e._setCustomVar',3,'rid','0',2]);
+_gaq.push(['e._setCustomVar',4,'bra','mod21',3]);
+_gaq.push(['e._setAllowAnchor',true]);
+_gaq.push(['e._setSiteSpeedSampleRate', 10]);
+_gaq.push(['f._setCustomVar',1,'template','pub_site',3]);
+_gaq.push(['f._setCustomVar',2,'domain','linuxtopia.org',3]);
+_gaq.push(['f._setSiteSpeedSampleRate', 20]);
+_gaq.push(['e._trackPageview']);
+_gaq.push(['f._trackPageview']);
+
+
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<script type="text/javascript">var ezouid = "1";</script><!--<base href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html">--><base href="."><script type="text/javascript">
+var ezoTemplate = 'pub_site';
+if(typeof ezouid == 'undefined')
+{
+    var ezouid = 'none';
+}
+var ezoFormfactor = '1';
+var ezo_elements_to_check = Array();
+</script>
+<script type="text/javascript">
+var soc_app_id = '0';
+var did = 31310;
+var ezdomain = 'linuxtopia.org';
+var ezoicSearchable = 1;
+</script>
+
+
+<script data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript" style="display:none">
+__ez.queue.addFile('__ezf_ezosuigeneris', '//g.ezoic.net/ezosuigeneris.js', true, [], true, false, false, false);
+var __ez_ezosuigenerisEvt = function() { __ez.bit.AddAndFire(_ezaq['page_view_id'], [(new __ezDotData('universal_user_id', ezosuigeneris))]); };
+__ez.queue.addFunc('__ez_ezosuigenerisEvt', '__ez_ezosuigenerisEvt', null, false, ['__ezf_ezosuigeneris'], false, false, false, false);</script><script data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript" style="display:none">__ez.queue.addFile('__ezf_ezosuigenerisc', '//g.ezoic.net/ezosuigenerisc.js?nogen=1', true, [], true, false, false, false);</script>
+<script data-pagespeed-no-defer="" data-cfasync="false">
+function create_ezolpl() {
+    var d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    __ez.ck.setByCat("ezux_lpl_31310=" + new Date().getTime() + "|3567450a-b30e-4e40-7652-4650f62caa98; " + expires, 3);
+}
+function attach_ezolpl() {
+    if(window.attachEvent) {
+        window.attachEvent('onload', create_ezolpl);
+    } else {
+        if(window.onload) {
+            var curronload = window.onload;
+            var newonload = function(evt) {
+                curronload(evt);
+                create_ezolpl();
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = create_ezolpl;
+        }
+    }
+}
+attach_ezolpl();
+</script>
+<script type="text/javascript" src="./An Introduction to GCC - Floating-point issues_files/f.txt" cf-marker-42701127381096615=""></script>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td height="87"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="342" rowspan="2"><img src="./An Introduction to GCC - Floating-point issues_files/toplogo.jpg" width="342" height="87"></td>
+<td width="34" rowspan="2"><img src="./An Introduction to GCC - Floating-point issues_files/topmidspace.jpg" width="34" height="87"></td>
+<td background="./An Introduction to GCC - Floating-point issues_files/topbg.jpg"><img src="./An Introduction to GCC - Floating-point issues_files/topbg.jpg" width="1" height="54"></td>
+</tr>
+<tr>
+<td background="./An Introduction to GCC - Floating-point issues_files/topnavbg.jpg">
+<img src="./An Introduction to GCC - Floating-point issues_files/btn_home.jpg" name="btn_home" width="55" height="33" id="btn_home" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href=&#39;/index.html&#39;" onmouseover="if (!window.__cfRLUnblockHandlers) return false; MM_swapImage(&#39;btn_home&#39;,&#39;&#39;,&#39;/images/btn_home_dn.jpg&#39;,1)" onmouseout="if (!window.__cfRLUnblockHandlers) return false; MM_swapImgRestore()"><img src="./An Introduction to GCC - Floating-point issues_files/navspacer.jpg" width="1" height="33"><img src="./An Introduction to GCC - Floating-point issues_files/btn_library.jpg" name="btn_library" width="67" height="33" id="btn_library" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href=&#39;/online_books/index.html&#39;" onmouseover="if (!window.__cfRLUnblockHandlers) return false; MM_swapImage(&#39;btn_library&#39;,&#39;&#39;,&#39;/images/btn_library_dn.jpg&#39;,1)" onmouseout="if (!window.__cfRLUnblockHandlers) return false; MM_swapImgRestore()"><img src="./An Introduction to GCC - Floating-point issues_files/navspacer.jpg" width="1" height="33"><img src="./An Introduction to GCC - Floating-point issues_files/btn_techotopia.jpg" name="btn_techotopia_dn.jpg" width="83" height="33" id="btn_techotopia" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href=&#39;https://www.techotopia.com&#39;" onmouseover="if (!window.__cfRLUnblockHandlers) return false; MM_swapImage(&#39;btn_techotopia&#39;,&#39;&#39;,&#39;/images/btn_techotopia_dn.jpg&#39;,1)" onmouseout="if (!window.__cfRLUnblockHandlers) return false; MM_swapImgRestore()"><img src="./An Introduction to GCC - Floating-point issues_files/navspacer.jpg" width="1" height="33"><img src="./An Introduction to GCC - Floating-point issues_files/btn_virtuatopia.jpg" name="btn_virtuatopia_dn.jpg" width="83" height="33" id="btn_virtuatopia" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href=&#39;https://www.virtuatopia.com&#39;" onmouseover="if (!window.__cfRLUnblockHandlers) return false; MM_swapImage(&#39;btn_virtuatopia&#39;,&#39;&#39;,&#39;/images/btn_virtuatopia_dn.jpg&#39;,1)" onmouseout="if (!window.__cfRLUnblockHandlers) return false; MM_swapImgRestore()"><img src="./An Introduction to GCC - Floating-point issues_files/navspacer.jpg" width="1" height="33"><img src="./An Introduction to GCC - Floating-point issues_files/btn_store.jpg" name="btn_store_dn.jpg" width="83" height="33" id="btn_store" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href=&#39;https://www.ebookfrenzy.com/index.html&#39;" onmouseover="if (!window.__cfRLUnblockHandlers) return false; MM_swapImage(&#39;btn_store&#39;,&#39;&#39;,&#39;/images/btn_store_dn.jpg&#39;,1)" onmouseout="if (!window.__cfRLUnblockHandlers) return false; MM_swapImgRestore()"><img src="./An Introduction to GCC - Floating-point issues_files/navspacer.jpg" width="1" height="33"></td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr>
+<td valign="top">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" background="./An Introduction to GCC - Floating-point issues_files/topnavbg.jpg">
+<tbody><tr bgcolor="#297dac">
+<td colspan="2" align="center"><table border="0" cellpadding="1"><tbody><tr><td>
+
+<span id="ezoic-pub-ad-placeholder-106"></span><span style="display:inline-block;float:none !important;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:728px;" class="ezoic-ad box-2 adtester-container adtester-container-106" data-ez-name="linuxtopia_org-box-2"><span id="div-gpt-ad-linuxtopia_org-box-2-0" ezaw="728" ezah="90" style="position:relative;z-index:0;display:inline-block;min-height:90px;min-width:728px;" class="ezoic-ad"><script data-cfasync="false" type="text/javascript" style="display:none;">eval(ez_write_tag([[728,90],'linuxtopia_org-box-2','ezslot_2',106,'0','0']));</script></span></span>
+
+</td></tr></tbody></table>
+</td>
+</tr>
+<tr>
+<td width="200" rowspan="2" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr align="center" bgcolor="#98bfdc" height="40">
+<td><a href="https://www.twitter.com/Techotopia"><img src="./An Introduction to GCC - Floating-point issues_files/follow_us-a.png" alt="Follow Techotopia on Twitter"></a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/spacer.gif" width="1" height="1">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td width="20" rowspan="23"><img src="./An Introduction to GCC - Floating-point issues_files/spacer.gif" width="20" height="1"></td>
+<td><br>
+<span class="sidelinks">On-line Guides</span></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/index.html">All Guides</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.ebookfrenzy.com/index.html">eBook Store</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/android_index.html">iOS / Android</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_for_beginners_index.html">Linux for Beginners</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/office_tools_index.html">Office Productivity</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_installation_index.html">Linux Installation</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_security_index.html">Linux Security</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_tools_index.html">Linux Utilities</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_virtualization_index.html">Linux Virtualization</a></td>
+</tr><tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_kernel_index.html">Linux Kernel</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_administration_index.html">System/Network Admin</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_programming_index.html">Programming</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_programming_index.html">Scripting Languages</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_devtools_index.html">Development Tools</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/web_development_index.html">Web Development</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/linux_gui_toolkit_index.html">GUI Toolkits/Desktop</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/database_guides_index.html">Databases</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/mail_systems/postfix_documentation/index.html">Mail Systems</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/opensolaris_2008/index.html">openSolaris</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/online_books/eclipse_guides.html">Eclipse Documentation</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.techotopia.com/">Techotopia.com</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.virtuatopia.com/">Virtuatopia.com</a></td>
+</tr>
+<tr>
+<td rowspan="11"><img src="./An Introduction to GCC - Floating-point issues_files/spacer.gif" width="20" height="1"></td> <td><br>
+<span class="sidelinks">How To Guides</span></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/virtualization/index.html">Virtualization</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">General System Admin</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">Linux Security</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">Linux Filesystems</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">Web Servers</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">Graphics &amp;
+Desktop</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/index.html">PC Hardware</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/HowToGuides/windows/index.html">Windows</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/ProblemSolutions/index.html">Problem Solutions</a></td>
+</tr>
+<tr>
+<td><img src="./An Introduction to GCC - Floating-point issues_files/arrow.jpg" width="20" height="10"><a class="navlink" href="https://www.linuxtopia.org/privacy_policy.html">Privacy Policy</a></td>
+</tr>
+<tr>
+<td rowspan="2"><img src="./An Introduction to GCC - Floating-point issues_files/spacer.gif" width="20" height="1"></td>
+<td>
+<span class="sidelinks">
+<span class="sidelinks"><br>
+&nbsp;&nbsp;<a href="https://goo.gl/QYxL5">
+<img src="./An Introduction to GCC - Floating-point issues_files/eBookStore_trans.png"></a>
+<br><br>
+<br>
+<a href="https://ebookfrenzy.com/ebookpages/rhel_8_ebook.html"><img src="./An Introduction to GCC - Floating-point issues_files/rhel_8_sky-fs8-2.png"></a>
+<br>
+<div style="height:600px;width:160px">
+
+<span id="ezoic-pub-ad-placeholder-101"></span>
+
+</div>
+<div id="42531" style="display:vertical-align;"><article style="position: relative; width: 159px; height: 599px; margin:0 auto;"><span class="raCloseButton raac raacRight"><div style="width:100%;height:100%; font-weight:bold; color:#d50215;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve" style="float: left; margin: 0 5px 0 0"> <path style="fill:none;" d="M1.347,12.256c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.017-0.113,0.065-0.16c1.464-1.462,2.926-2.924,4.389-4.39C5.787,1.3,5.835,1.284,5.9,1.284c0,0,0,0-0.001,0 c-0.065,0-0.112,0.016-0.161,0.063c-1.462,1.465-2.925,2.928-4.389,4.39c-0.047,0.047-0.065,0.094-0.065,0.16 c0.002,2.069,0.002,4.138,0,6.207C1.284,12.167,1.301,12.211,1.347,12.256c1.466,1.464,2.931,2.93,4.395,4.396 c0.045,0.045,0.089,0.063,0.152,0.063c0,0,0,0,0.001,0c-0.063,0-0.107-0.018-0.152-0.063C4.279,15.186,2.813,13.72,1.347,12.256z"></path> <path style="fill:none;" d="M8.998,16.713c1.035,0,2.069,0,3.104,0.002C11.066,16.713,10.032,16.713,8.998,16.713L8.998,16.713z"></path> <path style="fill:#DCDCDC;" d="M17.934,5.198c-1.705-1.702-3.408-3.405-5.11-5.109C12.795,0.061,12.771,0.03,12.746,0H5.253 C5.232,0.025,5.213,0.053,5.19,0.076C3.486,1.781,1.781,3.485,0.076,5.19C0.053,5.213,0.025,5.231,0,5.252v7.494 c0.025,0.021,0.053,0.039,0.076,0.063c1.708,1.707,3.416,3.414,5.122,5.123C5.245,17.979,5.29,18,5.357,18 c2.427-0.002,4.854-0.002,7.282,0c0.065,0,0.112-0.018,0.159-0.064c1.711-1.715,3.423-3.426,5.136-5.137 C17.982,12.752,18,12.705,18,12.639c-0.002-2.428-0.002-4.854,0-7.281C18,5.29,17.98,5.245,17.934,5.198z M16.716,12.102 c0,0.064-0.016,0.111-0.063,0.16c-1.465,1.461-2.928,2.924-4.389,4.389c-0.05,0.047-0.097,0.064-0.162,0.064 c-1.035-0.002-2.069-0.002-3.104-0.002c-1.034,0-2.068,0-3.103,0.002l0,0c0,0,0,0-0.001,0c-0.063,0-0.107-0.018-0.152-0.063 c-1.464-1.467-2.929-2.933-4.396-4.396c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.018-0.113,0.065-0.16c1.464-1.462,2.927-2.925,4.389-4.39C5.787,1.3,5.834,1.284,5.899,1.284c0,0,0,0,0.001,0 c2.065,0.001,4.131,0.001,6.198,0c0.067,0,0.117,0.018,0.168,0.068c1.459,1.462,2.92,2.923,4.385,4.383 c0.048,0.049,0.065,0.099,0.065,0.168C16.714,7.969,16.714,10.036,16.716,12.102z"></path> <path style="fill:#D50215;" d="M12.266,1.352c1.459,1.462,2.92,2.923,4.383,4.382c0.049,0.05,0.065,0.1,0.065,0.168 c-0.001,2.067-0.001,4.133,0.001,6.2c0,0.064-0.017,0.111-0.064,0.16c-1.463,1.461-2.928,2.924-4.389,4.389 c-0.049,0.048-0.096,0.064-0.16,0.064c0.065,0,0.112-0.018,0.162-0.064c1.461-1.465,2.924-2.928,4.389-4.389 c0.048-0.049,0.063-0.096,0.063-0.16c-0.002-2.065-0.002-4.133,0-6.199c0-0.069-0.018-0.119-0.065-0.168 C15.186,4.275,13.725,2.814,12.266,1.352z"></path> <path style="fill:#D50215;" d="M5.895,16.715L5.895,16.715c1.034-0.002,2.068-0.002,3.103-0.002h0 C7.962,16.713,6.929,16.713,5.895,16.715z"></path> <polygon style="fill:#D50215;" points="6.39,6.887 5.693,10.123 7.106,10.123 6.411,6.887 "></polygon> <path style="fill:#D50215;" d="M12.729,7.643c0-0.686-0.322-0.937-1.049-0.937h-0.524v1.885h0.414 C12.377,8.591,12.729,8.329,12.729,7.643z"></path> <path style="fill:#D50215;" d="M11.78,9.598h-0.624v2.167h0.565c0.695,0,1.168-0.25,1.168-1.087S12.417,9.598,11.78,9.598z"></path> <path style="fill:#D50215;" d="M16.714,5.902c0-0.068-0.017-0.118-0.065-0.168c-1.463-1.459-2.924-2.92-4.383-4.382 c-0.051-0.05-0.101-0.068-0.168-0.068c-2.066,0.001-4.132,0.001-6.198,0c-0.065,0-0.113,0.016-0.161,0.063 C4.276,2.813,2.814,4.275,1.35,5.737c-0.048,0.047-0.065,0.094-0.065,0.16c0.002,2.069,0.002,4.138,0,6.207 c0,0.063,0.017,0.107,0.062,0.152c1.466,1.464,2.932,2.93,4.396,4.396c0.045,0.045,0.089,0.063,0.152,0.063 c1.034-0.002,2.067-0.002,3.102-0.002h0h0c1.034,0,2.068,0,3.104,0.002c0.064,0,0.111-0.017,0.16-0.064 c1.461-1.465,2.926-2.928,4.389-4.389c0.048-0.049,0.064-0.096,0.064-0.16C16.713,10.035,16.713,7.969,16.714,5.902z M7.69,12.834 l-0.333-1.522H5.443L5.11,12.834H3.598l1.904-7.197h1.794l1.904,7.197H7.69z M12.154,12.834H9.706V5.637h2.429 c1.188,0,2.045,0.444,2.045,1.824c0,0.776-0.361,1.371-1.087,1.573v0.02c0.805,0.111,1.311,0.706,1.311,1.674 C14.403,11.856,13.849,12.834,12.154,12.834z"></path> </svg> Block Ad</div></span><a href="https://www.linuxtopia.org/includes/index.php/?url=aHR0cHM6Ly9hbHdheXMucmVzdG9yaW5nLmNsdWIvYWZmL2FiY2xpY2sucGhwP3N1YjI9MzIxOTEmc3ViPWFIUjBjRG92TDNONWJtUnBZMkYwYVc5dUxuUnlZV1ptYVdOeVpYQnpMbU52YlM5eVpYQnZjblJ6TDJOc2FXTnJMbkJvY0Q5a1lYUmhQV0pxYUZKak1GSTBaRmhzTTFwRlRURmlSMVpEWWpOc1ZWVllVakprTWpWT1dUQk9hbGRJVGt4TE1IQjNZVVZHVW1OWVdsSmtWbHBKVERCak5VNUhVbkJOVmxKNVZGaHZOVTFzVGxGalZVWXhWVWRzY0ZWWGJEQk9SWFJ2VGtad1MxcHRSblJWUjFKVVlraFNjRlo2U201YWJtYzFaREJOTWxacVp6TmhiVTR5VVZSRk5GWXhSbnBXUjBwR1ZVUnNWR1JIV1ROWGFYUnJVbXh3Y2sxNldrVlJiVXBhVVhwRk1HTlVWbkpoYkZaV1ZqQTVORlZyWkc5VWFrRXpaREp3VWxOVk1YTkxNbkJLVWtSRk1XRkRkRUphUkVKdlpFTjBXbE5xUVROVVYwNXJWMWh3V2s1WVozSlZVemw1VGxkb1JXSllXVE5QVlZsNFdtNVNORlo2VGxaYVZtaFdVMFJhYUZGcldsSmxWemxHVm01c2FHSnBkREJrVXpsdFZraFNVVlpYYkRKVlYxRXpVVlpvTTAxc2NFaFBSelJ5WlZoUmRsRlZlR2hYYmxKWVl6RnZlbE13YjNkaGVtaElZVzVHVjJOdVVtbGtiRXAxVFcxek0wMVdjRFZrV0hBd1ZGaFdNVTlJY0ZkTU0wWkxWVEJHYTFkclVqTmtWRXBRVjIxb1ZXUnVUbTlVYW1SS1ZFVldObVF4UmxwVk1YQjJXak5hUzAxR2NFbGxWa0pTVTBoak5WRjZVbXRsYlZKNVdsTTVhRXN5YkRGa2JGa3paR3R3VkZSV1RqSlhWWFJvVTBjeFVsQlVNRDAlM0Q%3D" target="_blank"><span><img src="./An Introduction to GCC - Floating-point issues_files/saved_resource" border="0" width="159" height="599 " style="margin: 0 auto; vertical-align: middle; display: inline-block;"></span></a><section style="display: none; position: absolute; z-index: 2147483647; max-width: 200px; margin: 5px; top: 0px; right: 0px;"><div class="raInfo"><div class="raInfoTop"><div class="raInfoClose">x</div><p>Ads support this site and keep the content free.</p></div><div class="raInfoRow"><span class="optOutOne">opt-out this ad placement</span></div><div class="raInfoRow"><span class="optOutAll">opt-out all ads</span></div><div class="raInfoRow"><span class="cancel">cancel</span></div><div class="raInfoTop"><p style="text-align: left"><a href="http://adblockchoices.org/" target="_blank">Ad Choices</a></p></div></div></section></article></div><div id="42532" style="display:vertical-align;"><article style="position: relative; width: 159px; height: 599px; margin:0 auto;"><span class="raCloseButton raac raacRight"><div style="width:100%;height:100%; font-weight:bold; color:#d50215;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve" style="float: left; margin: 0 5px 0 0"> <path style="fill:none;" d="M1.347,12.256c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.017-0.113,0.065-0.16c1.464-1.462,2.926-2.924,4.389-4.39C5.787,1.3,5.835,1.284,5.9,1.284c0,0,0,0-0.001,0 c-0.065,0-0.112,0.016-0.161,0.063c-1.462,1.465-2.925,2.928-4.389,4.39c-0.047,0.047-0.065,0.094-0.065,0.16 c0.002,2.069,0.002,4.138,0,6.207C1.284,12.167,1.301,12.211,1.347,12.256c1.466,1.464,2.931,2.93,4.395,4.396 c0.045,0.045,0.089,0.063,0.152,0.063c0,0,0,0,0.001,0c-0.063,0-0.107-0.018-0.152-0.063C4.279,15.186,2.813,13.72,1.347,12.256z"></path> <path style="fill:none;" d="M8.998,16.713c1.035,0,2.069,0,3.104,0.002C11.066,16.713,10.032,16.713,8.998,16.713L8.998,16.713z"></path> <path style="fill:#DCDCDC;" d="M17.934,5.198c-1.705-1.702-3.408-3.405-5.11-5.109C12.795,0.061,12.771,0.03,12.746,0H5.253 C5.232,0.025,5.213,0.053,5.19,0.076C3.486,1.781,1.781,3.485,0.076,5.19C0.053,5.213,0.025,5.231,0,5.252v7.494 c0.025,0.021,0.053,0.039,0.076,0.063c1.708,1.707,3.416,3.414,5.122,5.123C5.245,17.979,5.29,18,5.357,18 c2.427-0.002,4.854-0.002,7.282,0c0.065,0,0.112-0.018,0.159-0.064c1.711-1.715,3.423-3.426,5.136-5.137 C17.982,12.752,18,12.705,18,12.639c-0.002-2.428-0.002-4.854,0-7.281C18,5.29,17.98,5.245,17.934,5.198z M16.716,12.102 c0,0.064-0.016,0.111-0.063,0.16c-1.465,1.461-2.928,2.924-4.389,4.389c-0.05,0.047-0.097,0.064-0.162,0.064 c-1.035-0.002-2.069-0.002-3.104-0.002c-1.034,0-2.068,0-3.103,0.002l0,0c0,0,0,0-0.001,0c-0.063,0-0.107-0.018-0.152-0.063 c-1.464-1.467-2.929-2.933-4.396-4.396c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.018-0.113,0.065-0.16c1.464-1.462,2.927-2.925,4.389-4.39C5.787,1.3,5.834,1.284,5.899,1.284c0,0,0,0,0.001,0 c2.065,0.001,4.131,0.001,6.198,0c0.067,0,0.117,0.018,0.168,0.068c1.459,1.462,2.92,2.923,4.385,4.383 c0.048,0.049,0.065,0.099,0.065,0.168C16.714,7.969,16.714,10.036,16.716,12.102z"></path> <path style="fill:#D50215;" d="M12.266,1.352c1.459,1.462,2.92,2.923,4.383,4.382c0.049,0.05,0.065,0.1,0.065,0.168 c-0.001,2.067-0.001,4.133,0.001,6.2c0,0.064-0.017,0.111-0.064,0.16c-1.463,1.461-2.928,2.924-4.389,4.389 c-0.049,0.048-0.096,0.064-0.16,0.064c0.065,0,0.112-0.018,0.162-0.064c1.461-1.465,2.924-2.928,4.389-4.389 c0.048-0.049,0.063-0.096,0.063-0.16c-0.002-2.065-0.002-4.133,0-6.199c0-0.069-0.018-0.119-0.065-0.168 C15.186,4.275,13.725,2.814,12.266,1.352z"></path> <path style="fill:#D50215;" d="M5.895,16.715L5.895,16.715c1.034-0.002,2.068-0.002,3.103-0.002h0 C7.962,16.713,6.929,16.713,5.895,16.715z"></path> <polygon style="fill:#D50215;" points="6.39,6.887 5.693,10.123 7.106,10.123 6.411,6.887 "></polygon> <path style="fill:#D50215;" d="M12.729,7.643c0-0.686-0.322-0.937-1.049-0.937h-0.524v1.885h0.414 C12.377,8.591,12.729,8.329,12.729,7.643z"></path> <path style="fill:#D50215;" d="M11.78,9.598h-0.624v2.167h0.565c0.695,0,1.168-0.25,1.168-1.087S12.417,9.598,11.78,9.598z"></path> <path style="fill:#D50215;" d="M16.714,5.902c0-0.068-0.017-0.118-0.065-0.168c-1.463-1.459-2.924-2.92-4.383-4.382 c-0.051-0.05-0.101-0.068-0.168-0.068c-2.066,0.001-4.132,0.001-6.198,0c-0.065,0-0.113,0.016-0.161,0.063 C4.276,2.813,2.814,4.275,1.35,5.737c-0.048,0.047-0.065,0.094-0.065,0.16c0.002,2.069,0.002,4.138,0,6.207 c0,0.063,0.017,0.107,0.062,0.152c1.466,1.464,2.932,2.93,4.396,4.396c0.045,0.045,0.089,0.063,0.152,0.063 c1.034-0.002,2.067-0.002,3.102-0.002h0h0c1.034,0,2.068,0,3.104,0.002c0.064,0,0.111-0.017,0.16-0.064 c1.461-1.465,2.926-2.928,4.389-4.389c0.048-0.049,0.064-0.096,0.064-0.16C16.713,10.035,16.713,7.969,16.714,5.902z M7.69,12.834 l-0.333-1.522H5.443L5.11,12.834H3.598l1.904-7.197h1.794l1.904,7.197H7.69z M12.154,12.834H9.706V5.637h2.429 c1.188,0,2.045,0.444,2.045,1.824c0,0.776-0.361,1.371-1.087,1.573v0.02c0.805,0.111,1.311,0.706,1.311,1.674 C14.403,11.856,13.849,12.834,12.154,12.834z"></path> </svg> Block Ad</div></span><a href="https://www.linuxtopia.org/includes/index.php/?url=aHR0cHM6Ly9hbHdheXMucmVzdG9yaW5nLmNsdWIvYWZmL2FiY2xpY2sucGhwP3N1YjI9MzIxOTEmc3ViPWFIUjBjRG92TDNONWJtUnBZMkYwYVc5dUxuUnlZV1ptYVdOeVpYQnpMbU52YlM5eVpYQnZjblJ6TDJOc2FXTnJMbkJvY0Q5a1lYUmhQV0pxYUZKak1GSTBaRmhzTTFwRlRURmlSMVpEWWpOc1ZWVllVakpPTW5RelpXNXNibEZzU2tKVFZVbDRWVmM0TkdWWGNIWlZWWEI2VkRGU01FOUhXVE5aTUVwQ1RrZEtTRnBYY0c1VVZYQnlVVlZOZG1SWVRYWmFSM2hMWkRBME1HSXpUa3hSVlRSM1QwYzBNR0pYUmxCaFZscE9UMVJhZGsweFpHOVRhM2hYVTFock0wMUlTbGxpYkZaS1l6SXhiRlpGU1ROaWJGWlFZVEZzV1ZaSGFHbGhTR1JSVGpOVk1WcHVRa3hTU0dneVlVZHdSbVZJUm1oTk1FcFVaRE5rY1dKVVdqVmlWMlIzWW1zNVVXVkVhRnBqV0djMVVsZDRkR05zY0ZGa1IwWTBUbGRTVTFSdE9UWlJNakYwWWxVNE0xUkhPVTFoVlhCQ1RucFdlRmRHUWxsV2VrSmhWRVJHTkZKSE1XOWtiazUxWkhwSmVHRjZaR0ZaVjBaTlpIb3dPUSUzRCUzRA%3D%3D" target="_blank"><span><img src="./An Introduction to GCC - Floating-point issues_files/saved_resource(1)" border="0" width="159" height="599 " style="margin: 0 auto; vertical-align: middle; display: inline-block;"></span></a><section style="display: none; position: absolute; z-index: 2147483647; max-width: 200px; margin: 5px; top: 0px; right: 0px;"><div class="raInfo"><div class="raInfoTop"><div class="raInfoClose">x</div><p>Ads support this site and keep the content free.</p></div><div class="raInfoRow"><span class="optOutOne">opt-out this ad placement</span></div><div class="raInfoRow"><span class="optOutAll">opt-out all ads</span></div><div class="raInfoRow"><span class="cancel">cancel</span></div><div class="raInfoTop"><p style="text-align: left"><a href="http://adblockchoices.org/" target="_blank">Ad Choices</a></p></div></div></section></article></div>
+</span></span></td>
+</tr>
+<tr>
+<td>
+</td></tr>
+
+
+</tbody></table></td>
+</tr>
+</tbody></table></td>
+<td valign="top" bgcolor="#FFFFFF">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td height="10" colspan="3" background="./An Introduction to GCC - Floating-point issues_files/navbasebg.jpg"><img src="./An Introduction to GCC - Floating-point issues_files/navbasebg.jpg" width="1" height="10"></td>
+</tr>
+<tr>
+<td colspan="3" align="center">
+<br>
+
+<span id="ezoic-pub-ad-placeholder-102"></span><div id="42534"><article style="position: relative; width: 727px; height: 89px; margin:0 auto;"><span class="raCloseButton raac raacRight"><div style="width:100%;height:100%; font-weight:bold; color:#d50215;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve" style="float: left; margin: 0 5px 0 0"> <path style="fill:none;" d="M1.347,12.256c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.017-0.113,0.065-0.16c1.464-1.462,2.926-2.924,4.389-4.39C5.787,1.3,5.835,1.284,5.9,1.284c0,0,0,0-0.001,0 c-0.065,0-0.112,0.016-0.161,0.063c-1.462,1.465-2.925,2.928-4.389,4.39c-0.047,0.047-0.065,0.094-0.065,0.16 c0.002,2.069,0.002,4.138,0,6.207C1.284,12.167,1.301,12.211,1.347,12.256c1.466,1.464,2.931,2.93,4.395,4.396 c0.045,0.045,0.089,0.063,0.152,0.063c0,0,0,0,0.001,0c-0.063,0-0.107-0.018-0.152-0.063C4.279,15.186,2.813,13.72,1.347,12.256z"></path> <path style="fill:none;" d="M8.998,16.713c1.035,0,2.069,0,3.104,0.002C11.066,16.713,10.032,16.713,8.998,16.713L8.998,16.713z"></path> <path style="fill:#DCDCDC;" d="M17.934,5.198c-1.705-1.702-3.408-3.405-5.11-5.109C12.795,0.061,12.771,0.03,12.746,0H5.253 C5.232,0.025,5.213,0.053,5.19,0.076C3.486,1.781,1.781,3.485,0.076,5.19C0.053,5.213,0.025,5.231,0,5.252v7.494 c0.025,0.021,0.053,0.039,0.076,0.063c1.708,1.707,3.416,3.414,5.122,5.123C5.245,17.979,5.29,18,5.357,18 c2.427-0.002,4.854-0.002,7.282,0c0.065,0,0.112-0.018,0.159-0.064c1.711-1.715,3.423-3.426,5.136-5.137 C17.982,12.752,18,12.705,18,12.639c-0.002-2.428-0.002-4.854,0-7.281C18,5.29,17.98,5.245,17.934,5.198z M16.716,12.102 c0,0.064-0.016,0.111-0.063,0.16c-1.465,1.461-2.928,2.924-4.389,4.389c-0.05,0.047-0.097,0.064-0.162,0.064 c-1.035-0.002-2.069-0.002-3.104-0.002c-1.034,0-2.068,0-3.103,0.002l0,0c0,0,0,0-0.001,0c-0.063,0-0.107-0.018-0.152-0.063 c-1.464-1.467-2.929-2.933-4.396-4.396c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.018-0.113,0.065-0.16c1.464-1.462,2.927-2.925,4.389-4.39C5.787,1.3,5.834,1.284,5.899,1.284c0,0,0,0,0.001,0 c2.065,0.001,4.131,0.001,6.198,0c0.067,0,0.117,0.018,0.168,0.068c1.459,1.462,2.92,2.923,4.385,4.383 c0.048,0.049,0.065,0.099,0.065,0.168C16.714,7.969,16.714,10.036,16.716,12.102z"></path> <path style="fill:#D50215;" d="M12.266,1.352c1.459,1.462,2.92,2.923,4.383,4.382c0.049,0.05,0.065,0.1,0.065,0.168 c-0.001,2.067-0.001,4.133,0.001,6.2c0,0.064-0.017,0.111-0.064,0.16c-1.463,1.461-2.928,2.924-4.389,4.389 c-0.049,0.048-0.096,0.064-0.16,0.064c0.065,0,0.112-0.018,0.162-0.064c1.461-1.465,2.924-2.928,4.389-4.389 c0.048-0.049,0.063-0.096,0.063-0.16c-0.002-2.065-0.002-4.133,0-6.199c0-0.069-0.018-0.119-0.065-0.168 C15.186,4.275,13.725,2.814,12.266,1.352z"></path> <path style="fill:#D50215;" d="M5.895,16.715L5.895,16.715c1.034-0.002,2.068-0.002,3.103-0.002h0 C7.962,16.713,6.929,16.713,5.895,16.715z"></path> <polygon style="fill:#D50215;" points="6.39,6.887 5.693,10.123 7.106,10.123 6.411,6.887 "></polygon> <path style="fill:#D50215;" d="M12.729,7.643c0-0.686-0.322-0.937-1.049-0.937h-0.524v1.885h0.414 C12.377,8.591,12.729,8.329,12.729,7.643z"></path> <path style="fill:#D50215;" d="M11.78,9.598h-0.624v2.167h0.565c0.695,0,1.168-0.25,1.168-1.087S12.417,9.598,11.78,9.598z"></path> <path style="fill:#D50215;" d="M16.714,5.902c0-0.068-0.017-0.118-0.065-0.168c-1.463-1.459-2.924-2.92-4.383-4.382 c-0.051-0.05-0.101-0.068-0.168-0.068c-2.066,0.001-4.132,0.001-6.198,0c-0.065,0-0.113,0.016-0.161,0.063 C4.276,2.813,2.814,4.275,1.35,5.737c-0.048,0.047-0.065,0.094-0.065,0.16c0.002,2.069,0.002,4.138,0,6.207 c0,0.063,0.017,0.107,0.062,0.152c1.466,1.464,2.932,2.93,4.396,4.396c0.045,0.045,0.089,0.063,0.152,0.063 c1.034-0.002,2.067-0.002,3.102-0.002h0h0c1.034,0,2.068,0,3.104,0.002c0.064,0,0.111-0.017,0.16-0.064 c1.461-1.465,2.926-2.928,4.389-4.389c0.048-0.049,0.064-0.096,0.064-0.16C16.713,10.035,16.713,7.969,16.714,5.902z M7.69,12.834 l-0.333-1.522H5.443L5.11,12.834H3.598l1.904-7.197h1.794l1.904,7.197H7.69z M12.154,12.834H9.706V5.637h2.429 c1.188,0,2.045,0.444,2.045,1.824c0,0.776-0.361,1.371-1.087,1.573v0.02c0.805,0.111,1.311,0.706,1.311,1.674 C14.403,11.856,13.849,12.834,12.154,12.834z"></path> </svg> Block Ad</div></span><a href="https://www.linuxtopia.org/includes/index.php/?url=aHR0cHM6Ly9hbHdheXMucmVzdG9yaW5nLmNsdWIvYWZmL2FiY2xpY2sucGhwP3N1YjI9MzIxOTEmc3ViPWFIUjBjRG92TDNONWJtUnBZMkYwYVc5dUxuUnlZV1ptYVdOeVpYQnpMbU52YlM5eVpYQnZjblJ6TDJOc2FXTnJMbkJvY0Q5a1lYUmhQV0pxYUZKak1GSTBaRmhzTTFwRlRURmlSMVpEWWpOc1ZWVllVakpsUlZJMlZtNWFWbUZyY0ROa1IyeEVaRmRTUW1KcmR6UldWa3BNWXpCR1ExTnRSbEJYV0hBeVRrZFdiRTVXVm1GT2JVNVFaRWRHUjA1SFZsZFRSbEUxV1Zod2EyTXlSbGhOTWpRMVYxWnNkbUl3Vm5oWlYzZzFWVzFrZVZOVlJtOU5hbHBMVDBSU2RWZFdUWGhYYTFaUVdtNXJNRkpIYzNaT1IxRXdZVlZPTkZWSVZqWmtSRkpQVjI1c1lVc3pVVEpoV0dReFUyNWFSR016Um1waFJHTTBXbFJvUjFWWFJqWk5SVGg0VDFoU2RHTXdjM0pUUjNRMVRWUmFVMkpFUm5OVGJURk5aV3BTUmsxcmRIQk1NREZYWWpGWk1sWlZXWEpWVXpsV1VraGFWMWR0U2xnJTNE" target="_blank"><span><img src="./An Introduction to GCC - Floating-point issues_files/saved_resource(2)" border="0" width="727" height="89 " style="margin: 0 auto; vertical-align: middle; display: inline-block;"></span></a><section style="display: none; position: absolute; z-index: 2147483647; max-width: 200px; margin: 5px; top: 0px; right: 0px;"><div class="raInfo"><div class="raInfoTop"><div class="raInfoClose">x</div><p>Ads support this site and keep the content free.</p></div><div class="raInfoRow"><span class="optOutOne">opt-out this ad placement</span></div><div class="raInfoRow"><span class="optOutAll">opt-out all ads</span></div><div class="raInfoRow"><span class="cancel">cancel</span></div><div class="raInfoTop"><p style="text-align: left"><a href="http://adblockchoices.org/" target="_blank">Ad Choices</a></p></div></div></section></article></div><span style="display:inline-block;float:none;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:970px;" class="ezoic-ad box-3 adtester-container adtester-container-102" data-ez-name="linuxtopia_org-box-3"><span id="div-gpt-ad-linuxtopia_org-box-3-0" ezaw="970" ezah="90" style="position:relative;z-index:0;display:inline-block;min-height:90px;min-width:970px;" class="ezoic-ad"><script data-cfasync="false" type="text/javascript" style="display:none;">eval(ez_write_tag([[970,90],'linuxtopia_org-box-3','ezslot_0',102,'0','0']));</script></span></span>
+
+</td>
+</tr>
+<tr>
+<td width="40">&nbsp;</td>
+<td>
+<p>&nbsp;</p>
+
+<div id="EchoTopic">
+<div class="nav2">
+<table width="100%" class="navdoc">
+<tbody><tr>
+<td class="prev"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_69.html">&lt;&lt;&lt; previous</a></td>
+<td class="toc"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/index.html">table of contents</a></td>
+<td class="next"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_71.html">next &gt;&gt;&gt;</a></td>
+</tr>
+</tbody></table>
+</div>
+<h2>8.6 Floating-point issues</h2>
+<p>
+The IEEE-754 standard defines the bit-level behavior of floating-point
+arithmetic operations on all modern processors. This allows numerical
+programs to be ported between different platforms with identical
+results, in principle. In practice, there are often minor variations
+caused by differences in the order of operations (depending on the
+compiler and optimization level) but these are generally not
+significant.
+</p>
+<p>
+However, more noticeable discrepancies can be seen when porting
+numerical programs between x86 systems and other platforms, because the
+the x87 floating point unit (FPU) on x86 processors computes results
+using extended precision internally (the values being converted to
+double precision only when they are stored to memory). In contrast,
+processors such as SPARC, PA-RISC, Alpha, MIPS and POWER/PowerPC work
+with native double-precision values throughout.<sup>(<a name="DOCF26" href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_foot.html#FOOT26">26</a>)</sup> The
+differences between these implementations lead to changes in rounding
+and underflow/overflow behavior, because intermediate values have a
+greater relative precision and exponent range when computed in extended
+precision.<sup>(<a name="DOCF27" href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_foot.html#FOOT27">27</a>)</sup> In particular, comparisons involving extended
+precision values may fail where the equivalent double precision values
+would compare equal.
+</p>
+<p>
+To avoid these incompatibilities, the x87 FPU also offers a hardware
+double-precision rounding mode. In this mode the results of each
+extended-precision floating-point operation are rounded to
+double precision in the floating-point registers by the FPU.
+It is important to note that the rounding
+only affects the precision, not the exponent range, so the result is a
+hybrid double-precision format with an extended range of exponents.
+</p>
+<p>
+On BSD systems such as FreeBSD, NetBSD and OpenBSD, the hardware
+double-precision rounding mode is the default, giving the greatest
+compatibility with native double precision platforms. On x86 GNU/Linux
+systems the default mode is extended precision (with the aim of
+providing increased accuracy). To enable the double-precision rounding
+mode it is necessary to override the default setting on per-process
+basis using the FLDCW "floating-point load control-word" machine
+instruction.<sup>(<a name="DOCF28" href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_foot.html#FOOT28">28</a>)</sup> A simple function which can be called to
+execute this instruction is shown below. It uses the GCC extension
+keyword <code>asm</code> to insert the specified instruction in the
+assembly language output:
+</p>
+<pre class="example">void 
+set_fpu (unsigned int mode)
+{
+  asm ("fldcw %0" : : "m" (*&amp;mode));
+}
+</pre>
+<p>
+The appropriate <code>mode</code> setting for double-precision rounding is
+<code>0x27F</code>. The mode value also controls the floating-point exception
+handling behavior and rounding-direction (see the Intel and AMD
+processor reference manuals for details).
+</p>
+<p>
+On x86 GNU/Linux, the function above can be called at the start of any
+program to disable excess precision. This will then reproduce the
+results of native double-precision processors, in the absence of
+underflows and overflows.
+</p>
+<p>
+The following program demonstrates the different rounding modes:
+</p>
+<pre class="example">#include &lt;stdio.h&gt;
+
+void 
+set_fpu (unsigned int mode)
+{
+  asm ("fldcw %0" : : "m" (*&amp;mode));
+}
+
+int
+main (void)
+{
+  double a = 3.0, b = 7.0, c;
+#ifdef DOUBLE
+  set_fpu (0x27F);  /* use double-precision rounding */
+#endif
+  c = a / b;
+
+  if (c == a / b) {
+    printf ("comparison succeeds\n");
+  } else {
+    printf ("unexpected result\n");
+  }
+  return 0;
+}
+</pre>
+<p>
+On x86 GNU/Linux systems the comparison <code>c == a / b</code> can produce an
+unexpected result if <code>c</code> is taken from memory (double precision)
+while <code>a / b</code> is computed in extended precision, because the
+fraction 3/7 has different representations in double and extended
+precision.
+</p>
+<pre class="example">$ gcc -Wall fptest.c
+$ ./a.out 
+unexpected result
+</pre>
+<p>
+Setting the hardware rounding mode to double precision prevents this
+from happening:
+</p>
+<pre class="example">$ gcc -Wall -DDOUBLE fptest.c
+$ ./a.out 
+comparison succeeds
+</pre>
+<p>
+Note that the floating-point control word affects the whole environment
+of the process, including any C Library functions that are called. One
+consequence of this is that <code>long double</code> arithmetic is effectively
+reduced to double precision, since it relies on extended precision operations.
+</p>
+<p>
+The floating point control word only affects the behavior of the x87
+FPU. Floating point operations computed with SSE and SSE2 instructions
+are always carried out in native double precision. Thus, the combined
+options
+</p>
+<pre class="example">$ gcc -Wall -msse2 -mfpmath=sse  ...
+</pre>
+<p>
+are often sufficient to remove the effects of extended-precision.
+However, some operations (such as transcendental functions) are not
+available in the SSE/SSE2 extensions and will still be computed on the
+x87 FPU.
+</p>
+<div class="nav2">
+<table width="100%" class="navdoc">
+<tbody><tr>
+<td class="prev"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_69.html">&lt;&lt;&lt; previous</a></td>
+<td class="toc"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/index.html">table of contents</a></td>
+<td class="next"><a href="https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_71.html">next &gt;&gt;&gt;</a></td>
+</tr>
+</tbody></table>
+</div>
+</div><div id="42536"><article style="position: relative; width: 727px; height: 89px; margin:0 auto;"><span class="raCloseButton raac raacRight"><div style="width:100%;height:100%; font-weight:bold; color:#d50215;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve" style="float: left; margin: 0 5px 0 0"> <path style="fill:none;" d="M1.347,12.256c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.017-0.113,0.065-0.16c1.464-1.462,2.926-2.924,4.389-4.39C5.787,1.3,5.835,1.284,5.9,1.284c0,0,0,0-0.001,0 c-0.065,0-0.112,0.016-0.161,0.063c-1.462,1.465-2.925,2.928-4.389,4.39c-0.047,0.047-0.065,0.094-0.065,0.16 c0.002,2.069,0.002,4.138,0,6.207C1.284,12.167,1.301,12.211,1.347,12.256c1.466,1.464,2.931,2.93,4.395,4.396 c0.045,0.045,0.089,0.063,0.152,0.063c0,0,0,0,0.001,0c-0.063,0-0.107-0.018-0.152-0.063C4.279,15.186,2.813,13.72,1.347,12.256z"></path> <path style="fill:none;" d="M8.998,16.713c1.035,0,2.069,0,3.104,0.002C11.066,16.713,10.032,16.713,8.998,16.713L8.998,16.713z"></path> <path style="fill:#DCDCDC;" d="M17.934,5.198c-1.705-1.702-3.408-3.405-5.11-5.109C12.795,0.061,12.771,0.03,12.746,0H5.253 C5.232,0.025,5.213,0.053,5.19,0.076C3.486,1.781,1.781,3.485,0.076,5.19C0.053,5.213,0.025,5.231,0,5.252v7.494 c0.025,0.021,0.053,0.039,0.076,0.063c1.708,1.707,3.416,3.414,5.122,5.123C5.245,17.979,5.29,18,5.357,18 c2.427-0.002,4.854-0.002,7.282,0c0.065,0,0.112-0.018,0.159-0.064c1.711-1.715,3.423-3.426,5.136-5.137 C17.982,12.752,18,12.705,18,12.639c-0.002-2.428-0.002-4.854,0-7.281C18,5.29,17.98,5.245,17.934,5.198z M16.716,12.102 c0,0.064-0.016,0.111-0.063,0.16c-1.465,1.461-2.928,2.924-4.389,4.389c-0.05,0.047-0.097,0.064-0.162,0.064 c-1.035-0.002-2.069-0.002-3.104-0.002c-1.034,0-2.068,0-3.103,0.002l0,0c0,0,0,0-0.001,0c-0.063,0-0.107-0.018-0.152-0.063 c-1.464-1.467-2.929-2.933-4.396-4.396c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.018-0.113,0.065-0.16c1.464-1.462,2.927-2.925,4.389-4.39C5.787,1.3,5.834,1.284,5.899,1.284c0,0,0,0,0.001,0 c2.065,0.001,4.131,0.001,6.198,0c0.067,0,0.117,0.018,0.168,0.068c1.459,1.462,2.92,2.923,4.385,4.383 c0.048,0.049,0.065,0.099,0.065,0.168C16.714,7.969,16.714,10.036,16.716,12.102z"></path> <path style="fill:#D50215;" d="M12.266,1.352c1.459,1.462,2.92,2.923,4.383,4.382c0.049,0.05,0.065,0.1,0.065,0.168 c-0.001,2.067-0.001,4.133,0.001,6.2c0,0.064-0.017,0.111-0.064,0.16c-1.463,1.461-2.928,2.924-4.389,4.389 c-0.049,0.048-0.096,0.064-0.16,0.064c0.065,0,0.112-0.018,0.162-0.064c1.461-1.465,2.924-2.928,4.389-4.389 c0.048-0.049,0.063-0.096,0.063-0.16c-0.002-2.065-0.002-4.133,0-6.199c0-0.069-0.018-0.119-0.065-0.168 C15.186,4.275,13.725,2.814,12.266,1.352z"></path> <path style="fill:#D50215;" d="M5.895,16.715L5.895,16.715c1.034-0.002,2.068-0.002,3.103-0.002h0 C7.962,16.713,6.929,16.713,5.895,16.715z"></path> <polygon style="fill:#D50215;" points="6.39,6.887 5.693,10.123 7.106,10.123 6.411,6.887 "></polygon> <path style="fill:#D50215;" d="M12.729,7.643c0-0.686-0.322-0.937-1.049-0.937h-0.524v1.885h0.414 C12.377,8.591,12.729,8.329,12.729,7.643z"></path> <path style="fill:#D50215;" d="M11.78,9.598h-0.624v2.167h0.565c0.695,0,1.168-0.25,1.168-1.087S12.417,9.598,11.78,9.598z"></path> <path style="fill:#D50215;" d="M16.714,5.902c0-0.068-0.017-0.118-0.065-0.168c-1.463-1.459-2.924-2.92-4.383-4.382 c-0.051-0.05-0.101-0.068-0.168-0.068c-2.066,0.001-4.132,0.001-6.198,0c-0.065,0-0.113,0.016-0.161,0.063 C4.276,2.813,2.814,4.275,1.35,5.737c-0.048,0.047-0.065,0.094-0.065,0.16c0.002,2.069,0.002,4.138,0,6.207 c0,0.063,0.017,0.107,0.062,0.152c1.466,1.464,2.932,2.93,4.396,4.396c0.045,0.045,0.089,0.063,0.152,0.063 c1.034-0.002,2.067-0.002,3.102-0.002h0h0c1.034,0,2.068,0,3.104,0.002c0.064,0,0.111-0.017,0.16-0.064 c1.461-1.465,2.926-2.928,4.389-4.389c0.048-0.049,0.064-0.096,0.064-0.16C16.713,10.035,16.713,7.969,16.714,5.902z M7.69,12.834 l-0.333-1.522H5.443L5.11,12.834H3.598l1.904-7.197h1.794l1.904,7.197H7.69z M12.154,12.834H9.706V5.637h2.429 c1.188,0,2.045,0.444,2.045,1.824c0,0.776-0.361,1.371-1.087,1.573v0.02c0.805,0.111,1.311,0.706,1.311,1.674 C14.403,11.856,13.849,12.834,12.154,12.834z"></path> </svg> Block Ad</div></span><a href="https://www.linuxtopia.org/includes/index.php/?url=aHR0cHM6Ly9hbHdheXMucmVzdG9yaW5nLmNsdWIvYWZmL2FiY2xpY2sucGhwP3N1YjI9MzIxOTEmc3ViPWFIUjBjRG92TDNONWJtUnBZMkYwYVc5dUxuUnlZV1ptYVdOeVpYQnpMbU52YlM5eVpYQnZjblJ6TDJOc2FXTnJMbkJvY0Q5a1lYUmhQV0pxYUZKak1GSTBaRmhzTTFwRlRURmlSMVpEWWpOc1ZWVllVakpsUlZJMlZtNWFWbUZyY0ROa1IyeEVaRmRTUW1KcmR6UldWa3BNWXpCR1ExTnRSbEJYV0hBeVRrZFdiRTVXVm1GT2JVNVFaRWRHUjA1SFZsZFRSbEUxV1Zod2EyTXlSbGhOTWpRMVYxWnNkbUl3Vm5oWldFSnZWa2N3TUdKNU9YSlVXRTUwWlVSc2NsTlVXbmxNZW1STlZFWnNhVlZYUlRCV1IwNVpaVlY0VUdKcE9UVlVia3B0WVZkMFZWSXdTa2xSTUZaS1dtc3hWR013T0RGU1EzUnhaRE5TYmxOdFVYaE5WMmh2VlVSU01Ga3lNVkZaVjFvMFUyMXNhVlZyTVhOVlZHUnNZV3RXV0V3eFNsZFNhMnhvVmtkSk1WUXlaRTVaVlU0d1VsaFpjbFpWVm04JTNE" target="_blank"><span><img src="./An Introduction to GCC - Floating-point issues_files/saved_resource(3)" border="0" width="727" height="89 " style="margin: 0 auto; vertical-align: middle; display: inline-block;"></span></a><section style="display: none; position: absolute; z-index: 2147483647; max-width: 200px; margin: 5px; top: 0px; right: 0px;"><div class="raInfo"><div class="raInfoTop"><div class="raInfoClose">x</div><p>Ads support this site and keep the content free.</p></div><div class="raInfoRow"><span class="optOutOne">opt-out this ad placement</span></div><div class="raInfoRow"><span class="optOutAll">opt-out all ads</span></div><div class="raInfoRow"><span class="cancel">cancel</span></div><div class="raInfoTop"><p style="text-align: left"><a href="http://adblockchoices.org/" target="_blank">Ad Choices</a></p></div></div></section></article></div><div id="42537" style="margin: 20px 5px;"><article style="position: relative; width: 299px; height: 249px; margin:0 auto;"><span class="raCloseButton raac raacRight"><div style="width:100%;height:100%; font-weight:bold; color:#d50215;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 18 18" enable-background="new 0 0 18 18" xml:space="preserve" style="float: left; margin: 0 5px 0 0"> <path style="fill:none;" d="M1.347,12.256c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.017-0.113,0.065-0.16c1.464-1.462,2.926-2.924,4.389-4.39C5.787,1.3,5.835,1.284,5.9,1.284c0,0,0,0-0.001,0 c-0.065,0-0.112,0.016-0.161,0.063c-1.462,1.465-2.925,2.928-4.389,4.39c-0.047,0.047-0.065,0.094-0.065,0.16 c0.002,2.069,0.002,4.138,0,6.207C1.284,12.167,1.301,12.211,1.347,12.256c1.466,1.464,2.931,2.93,4.395,4.396 c0.045,0.045,0.089,0.063,0.152,0.063c0,0,0,0,0.001,0c-0.063,0-0.107-0.018-0.152-0.063C4.279,15.186,2.813,13.72,1.347,12.256z"></path> <path style="fill:none;" d="M8.998,16.713c1.035,0,2.069,0,3.104,0.002C11.066,16.713,10.032,16.713,8.998,16.713L8.998,16.713z"></path> <path style="fill:#DCDCDC;" d="M17.934,5.198c-1.705-1.702-3.408-3.405-5.11-5.109C12.795,0.061,12.771,0.03,12.746,0H5.253 C5.232,0.025,5.213,0.053,5.19,0.076C3.486,1.781,1.781,3.485,0.076,5.19C0.053,5.213,0.025,5.231,0,5.252v7.494 c0.025,0.021,0.053,0.039,0.076,0.063c1.708,1.707,3.416,3.414,5.122,5.123C5.245,17.979,5.29,18,5.357,18 c2.427-0.002,4.854-0.002,7.282,0c0.065,0,0.112-0.018,0.159-0.064c1.711-1.715,3.423-3.426,5.136-5.137 C17.982,12.752,18,12.705,18,12.639c-0.002-2.428-0.002-4.854,0-7.281C18,5.29,17.98,5.245,17.934,5.198z M16.716,12.102 c0,0.064-0.016,0.111-0.063,0.16c-1.465,1.461-2.928,2.924-4.389,4.389c-0.05,0.047-0.097,0.064-0.162,0.064 c-1.035-0.002-2.069-0.002-3.104-0.002c-1.034,0-2.068,0-3.103,0.002l0,0c0,0,0,0-0.001,0c-0.063,0-0.107-0.018-0.152-0.063 c-1.464-1.467-2.929-2.933-4.396-4.396c-0.045-0.045-0.062-0.089-0.062-0.152c0.002-2.068,0.002-4.138,0-6.207 c0-0.066,0.018-0.113,0.065-0.16c1.464-1.462,2.927-2.925,4.389-4.39C5.787,1.3,5.834,1.284,5.899,1.284c0,0,0,0,0.001,0 c2.065,0.001,4.131,0.001,6.198,0c0.067,0,0.117,0.018,0.168,0.068c1.459,1.462,2.92,2.923,4.385,4.383 c0.048,0.049,0.065,0.099,0.065,0.168C16.714,7.969,16.714,10.036,16.716,12.102z"></path> <path style="fill:#D50215;" d="M12.266,1.352c1.459,1.462,2.92,2.923,4.383,4.382c0.049,0.05,0.065,0.1,0.065,0.168 c-0.001,2.067-0.001,4.133,0.001,6.2c0,0.064-0.017,0.111-0.064,0.16c-1.463,1.461-2.928,2.924-4.389,4.389 c-0.049,0.048-0.096,0.064-0.16,0.064c0.065,0,0.112-0.018,0.162-0.064c1.461-1.465,2.924-2.928,4.389-4.389 c0.048-0.049,0.063-0.096,0.063-0.16c-0.002-2.065-0.002-4.133,0-6.199c0-0.069-0.018-0.119-0.065-0.168 C15.186,4.275,13.725,2.814,12.266,1.352z"></path> <path style="fill:#D50215;" d="M5.895,16.715L5.895,16.715c1.034-0.002,2.068-0.002,3.103-0.002h0 C7.962,16.713,6.929,16.713,5.895,16.715z"></path> <polygon style="fill:#D50215;" points="6.39,6.887 5.693,10.123 7.106,10.123 6.411,6.887 "></polygon> <path style="fill:#D50215;" d="M12.729,7.643c0-0.686-0.322-0.937-1.049-0.937h-0.524v1.885h0.414 C12.377,8.591,12.729,8.329,12.729,7.643z"></path> <path style="fill:#D50215;" d="M11.78,9.598h-0.624v2.167h0.565c0.695,0,1.168-0.25,1.168-1.087S12.417,9.598,11.78,9.598z"></path> <path style="fill:#D50215;" d="M16.714,5.902c0-0.068-0.017-0.118-0.065-0.168c-1.463-1.459-2.924-2.92-4.383-4.382 c-0.051-0.05-0.101-0.068-0.168-0.068c-2.066,0.001-4.132,0.001-6.198,0c-0.065,0-0.113,0.016-0.161,0.063 C4.276,2.813,2.814,4.275,1.35,5.737c-0.048,0.047-0.065,0.094-0.065,0.16c0.002,2.069,0.002,4.138,0,6.207 c0,0.063,0.017,0.107,0.062,0.152c1.466,1.464,2.932,2.93,4.396,4.396c0.045,0.045,0.089,0.063,0.152,0.063 c1.034-0.002,2.067-0.002,3.102-0.002h0h0c1.034,0,2.068,0,3.104,0.002c0.064,0,0.111-0.017,0.16-0.064 c1.461-1.465,2.926-2.928,4.389-4.389c0.048-0.049,0.064-0.096,0.064-0.16C16.713,10.035,16.713,7.969,16.714,5.902z M7.69,12.834 l-0.333-1.522H5.443L5.11,12.834H3.598l1.904-7.197h1.794l1.904,7.197H7.69z M12.154,12.834H9.706V5.637h2.429 c1.188,0,2.045,0.444,2.045,1.824c0,0.776-0.361,1.371-1.087,1.573v0.02c0.805,0.111,1.311,0.706,1.311,1.674 C14.403,11.856,13.849,12.834,12.154,12.834z"></path> </svg> Block Ad</div></span><a href="https://www.linuxtopia.org/includes/index.php/?url=aHR0cHM6Ly9hbHdheXMucmVzdG9yaW5nLmNsdWIvYWZmL2FiY2xpY2sucGhwP3N1YjI9MzIxOTEmc3ViPWFIUjBjRG92TDNONWJtUnBZMkYwYVc5dUxuUnlZV1ptYVdOeVpYQnpMbU52YlM5eVpYQnZjblJ6TDJOc2FXTnJMbkJvY0Q5a1lYUmhQV0pxYUZKak1GSTBaRmhzTTFwRlRURmlSMVpEWWpOc1ZWVllVakpsUlZJMlZtNWFWbUZyY0ROa1IyeEVaRmRTUW1KcmR6UldWa3BNWXpCR1ExTnRSbEJYV0hBeVRrZFdiRTVXVm1GT2JVNVFaRWRHUjA1SFZsZFRSbEUxV1Zod2EyTXlSbGhOTWpRMVYxWnNkbUl3Vm5oWlYyUlFVbTB4U0Vzd2VHRlRXR1JWVERCb1NVMVlhSGxUZWtZelZrVlZlbFpHV2xCVGVsSk1XbFZvYVV3d1NtMWpTRko0VFZkU1VVOUdXbHBpUjFKc1ZqRlZNV1JHVGpObFJYQklZWHBhVUdOSGNHdGFiVlYzVVRGa1ZtUlZhSEpXUTNSWFlsVjBlRTR6YnpOT01scHdVMWhLZWs1RGRFOVVhM2Q1WTBjMVdsVkRkRzVpVlZKRFZGWlNNVk5GWnpBJTNE" target="_blank"><span><img src="./An Introduction to GCC - Floating-point issues_files/saved_resource(4)" border="0" width="299" height="249 " style="margin: 0 auto; vertical-align: middle; display: inline-block;"></span></a><section style="display: none; position: absolute; z-index: 2147483647; max-width: 200px; margin: 5px; top: 0px; right: 0px;"><div class="raInfo"><div class="raInfoTop"><div class="raInfoClose">x</div><p>Ads support this site and keep the content free.</p></div><div class="raInfoRow"><span class="optOutOne">opt-out this ad placement</span></div><div class="raInfoRow"><span class="optOutAll">opt-out all ads</span></div><div class="raInfoRow"><span class="cancel">cancel</span></div><div class="raInfoTop"><p style="text-align: left"><a href="http://adblockchoices.org/" target="_blank">Ad Choices</a></p></div></div></section></article></div>
+
+<br>
+
+<span id="ezoic-pub-ad-placeholder-103"></span><span style="display:inline-block;float:none;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:110px;min-width:970px;" class="ezoic-ad medrectangle-1 adtester-container adtester-container-103" data-ez-name="linuxtopia_org-medrectangle-1"><span id="div-gpt-ad-linuxtopia_org-medrectangle-1-0" ezaw="970" ezah="90" style="position:relative;z-index:0;display:inline-block;min-height:90px;min-width:970px;" class="ezoic-ad"><script data-cfasync="false" type="text/javascript" style="display:none;">eval(ez_write_tag([[970,90],'linuxtopia_org-medrectangle-1','ezslot_1',103,'0','0']));</script></span><span style="width:970px;display:block;height:14px;margin:auto" class="reportline"><span style="text-align:center;font-size: smaller;float:left;line-height:normal;"><a href="https://www.ezoic.com/what-is-ezoic/" target="_blank" rel="noopener noreferrer nofollow" style="cursor:pointer"><img src="./An Introduction to GCC - Floating-point issues_files/ezoic.png" style="height:12px !important; padding:2px !important; border:0px !important; cursor:pointer !important; width: 58px !important; margin:0 !important; box-sizing: content-box !important;"></a></span><span class="ez-report-ad-button" name="?pageview_id=3567450a-b30e-4e40-7652-4650f62caa98&amp;ad_position_id=103&amp;impression_group_id=linuxtopia_org-medrectangle-1/2019-10-12/1280598&amp;ad_size=970x90&amp;domain_id=31310&amp;url=https://www.linuxtopia.org/online_books/an_introduction_to_gcc/gccintro_70.html" style="cursor: pointer!important; font-size:12px !important;color: #a5a5a5 ;float:right;text-decoration:none !important;font-family:arial !important;line-height:normal;">report this ad</span></span></span>
+
+<p>
+<script language="Javascript" type="text/javascript">
+
+	function writeBCBoxAdContent() {
+/*
+		BoxAdcontent.document.write("BC");
+		BoxAdcontent.document.write("<html><head><\/head><body>");
+		BoxAdcontent.document.write("<!-- BEGIN RAW TAG - 300 x 250 - Linuxtopia.org: Run-of-site - DO NOT MODIFY -->");
+		BoxAdcontent.document.write("<IFRAME FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=300 HEIGHT=250 SRC=\"https:\/\/ad.bannerconnect.net\/imp?z=2&Z=300x250&s=72461&t=3\"><\/IFRAME>");
+		BoxAdcontent.document.write("<!-- END TAG -->");
+		BoxAdcontent.document.close();
+*/
+        }
+
+        function writeTribalBoxAdContent() {
+
+                BoxAdcontent.document.write("<html><head><\/head><body>");
+
+		BoxAdcontent.document.write("<!-- TF 336x280 JScript VAR code -->");
+		BoxAdcontent.document.write("<center><script language=javascript><!--");
+		BoxAdcontent.document.write("document.write('<scr'+'ipt language=javascript src=\"https:\/\/a.tribalfusion.com\/j.ad?site=Linuxtopia&adSpace=ROS&size=336x280&type=var&requestID='+((new Date()).getTime() % 2147483648) + Math.random()+'\"><\/scr'+'ipt>');");
+		BoxAdcontent.document.write("\/\/-->");
+		BoxAdcontent.document.write("<\/script>");
+		BoxAdcontent.document.write("<noscript>");
+		BoxAdcontent.document.write("<a href=\"https:\/\/a.tribalfusion.com\/i.click?site=Linuxtopia&adSpace=ROS&size=336x280&requestID=1076511298\" target=_blank>");
+   		BoxAdcontent.document.write("<img src=\"https:\/\/a.tribalfusion.com\/i.ad?site=Linuxtopia&adSpace=ROS&size=336x280&requestID=1076511298\"");
+                BoxAdcontent.document.write("width=336 height=280 border=0 alt=\"Click Here\"><\/a>");
+		BoxAdcontent.document.write("<\/noscript>");
+		BoxAdcontent.document.write("<\/center>");
+		BoxAdcontent.document.write("<!-- TF 336x280 JScript VAR code -->");
+		BoxAdcontent.document.write("<\/body><\/html>");
+                BoxAdcontent.document.close();
+        }
+
+
+
+</script>
+</p></td>
+<td width="25">&nbsp;</td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr>
+<td bgcolor="#FFFFFF">&nbsp;</td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr>
+<td height="2" background="./An Introduction to GCC - Floating-point issues_files/basebg1.jpg"><img src="./An Introduction to GCC - Floating-point issues_files/basebg1.jpg" width="1" height="5"></td>
+</tr>
+<tr>
+<td height="4" valign="top" background="./An Introduction to GCC - Floating-point issues_files/basebg2.jpg">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td height="2" class="baseline">&nbsp;&nbsp;Published under the terms of the GNU General Public License</td>
+<td align="right" class="baseline"><a href="https://www.interspire.com/" class="baseline">Design by Interspire</a>&nbsp;&nbsp;</td>
+</tr>
+</tbody></table></td>
+</tr>
+</tbody></table>
+<script src="./An Introduction to GCC - Floating-point issues_files/tools.js.download" type="text/javascript"></script>
+<script type="text/javascript">
+		(function(f,a){function g(b,a,c){b.addEventListener?b.addEventListener(a,c):b.attachEvent("on"+a,function(){c.call(b)})}function k(b){b&&("string"==typeof b["class"]&&b["class"]&&a.getElementById("uglipop_popbox").setAttribute("class",b["class"]),b.keepLayout&&!b["class"]&&a.getElementById("uglipop_popbox").setAttribute("style","position:relative;height:300px;width:300px;background-color:white;opacity:1;"),"string"==typeof b.content&&b.content&&"html"==b.source&&(a.getElementById("uglipop_popbox").innerHTML=b.content),"string"==typeof b.content&&b.content&&"div"==b.source&&(a.getElementById("uglipop_popbox").innerHTML=a.getElementById(b.content).innerHTML));a.getElementById("uglipop_overlay_wrapper").style.display="";a.getElementById("uglipop_overlay").style.display="";a.getElementById("uglipop_content_fixed").style.display=""}function h(){a.getElementById("uglipop_overlay_wrapper").style.display="none";a.getElementById("uglipop_overlay").style.display="none";a.getElementById("uglipop_content_fixed").style.display="none"}g(a,"DOMContentLoaded",function(){var b=a.createElement("div"),e=a.createElement("div"),c=a.createElement("div"),d=a.createElement("div");e.id="uglipop_content_fixed";e.setAttribute("style","position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);opacity:1;z-index:10000000;");c.id="uglipop_popbox";d.id="uglipop_overlay_wrapper";d.setAttribute("style","position:absolute;top:0;bottom:0;left:0;right:0;display:none");b.id="uglipop_overlay";b.setAttribute("style","position:fixed;top:0;bottom:0;left:0;right:0;opacity:0.3;width:100%;height:100%;background-color:black;");d.appendChild(b);e.appendChild(c);a.body.appendChild(d);a.body.appendChild(e);a.getElementById("uglipop_overlay_wrapper").style.display="none";a.getElementById("uglipop_overlay").style.display="none";a.getElementById("uglipop_content_fixed").style.display="none";d.addEventListener("click",h);g(f,"keydown",function(a){27==a.keyCode&&h()});f.uglipop=k})})(window,document);
+			var ezRBA = (function() {
+			  function init() {
+				var reportAdsBtns = document.querySelectorAll('.ez-report-ad-button');
+				for (var i = 0; i < reportAdsBtns.length; i++) {
+				  reportAdsBtns[i].addEventListener('click', function(e) {
+					var url = '<iframe src="https://ezoic.com/pub/reportads.html' + e.target.getAttribute('name') + '" width="400" height="500" style="border-radius: 10px; box-shadow: 2px 2px 30px 6px rgba(0,0,0,0.75); border: 1px solid black;"></iframe>'
+					uglipop({
+					  class: 'none',
+					  source: 'html',
+					  content: url,
+					});
+				  });
+				}
+				function bindEvent(element, eventName, eventHandler) {
+					if (element.addEventListener) {
+						element.addEventListener(eventName, eventHandler, false);
+					} else if (element.attachEvent) {
+						element.attachEvent('on' + eventName, eventHandler);
+					}
+				}
+				bindEvent(window, 'message', function(e) {
+					if (e.data === 'close-report-ad-modal') {
+						document.getElementById('uglipop_overlay_wrapper').style.display = 'none';	
+						document.getElementById('uglipop_overlay').style.display = 'none';	
+						document.getElementById('uglipop_content_fixed').style.display = 'none';	
+					}
+				})
+			  }
+
+			  return {
+				init: init
+			  };
+			})();
+			ezRBA.init();
+		</script>
+<script type="text/javascript" style="display:none;">
+var __ez_dims = (function() {
+	var setCookie = function( name, content, expiry ) {
+		return document.cookie = name+'='+content+((expiry)?';expires='+(new Date(Math.floor(new Date().getTime()+expiry*1000)).toUTCString()):'')+';path=/';
+	};
+	var ffid = 1;
+	var oh = window.screen.height;
+	var ow = window.screen.width;
+	var h = ffid === 1 ? oh : (oh > ow) ? oh : ow;
+	var w = ffid === 1 ? ow : (oh > ow) ? ow : oh;
+	var uh = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+	var uw = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+	setCookie('ezds', encodeURIComponent('ffid='+ffid+',w='+w+',h='+h), (31536e3*7));
+	setCookie('ezohw', encodeURIComponent('w='+uw+',h='+uh), (31536e3*7));
+})();
+</script><script async="" type="text/javascript" style="display:none;">
+__ez.queue.addFile('edmonton.php', '/detroitchicago/edmonton.webp?a=a&cb=187-1&shcb=32', true, [], true, false, false, false);
+__ez.queue.addFile('jellyfish.php', '/porpoiseant/jellyfish.webp?a=a&cb=187-1&shcb=32', false, [], true, false, false, false);
+</script>
+<script type="text/javascript">var _audins_dom="linuxtopia_org",_audins_did=31310;__ez.queue.addDelayFunc("audins.js","__ez.script.add", "//go.ezoic.net/detroitchicago/audins.js?cb=187-1");</script><noscript><div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-31iz6hfFutd16.gif?labels=Domain.linuxtopia_org,DomainId.31310" border="0" height="1" width="1" alt="Quantcast"/></div></noscript><noscript><img src="https://sb.scorecardresearch.com/p?c1=2&c2=20015427&cv=2.0&cj=1"/></noscript>
+<div id="dmo1" style="display:none">
+<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-6396844742497208";
+		/* dmo */
+		google_ad_slot = "dmo";
+		google_ad_width = 88;
+		google_ad_height = 31;
+		//-->
+	</script>
+<script type="text/javascript" src="./An Introduction to GCC - Floating-point issues_files/f(1).txt"></script>
+</div>
+
+
+
+<div id="uglipop_overlay_wrapper" style="position:absolute;top:0;bottom:0;left:0;right:0;display:none"><div id="uglipop_overlay" style="position: fixed; top: 0px; bottom: 0px; left: 0px; right: 0px; opacity: 0.3; width: 100%; height: 100%; background-color: black; display: none;"></div></div><div id="uglipop_content_fixed" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; z-index: 10000000; display: none;"><div id="uglipop_popbox"></div></div></body></html>
