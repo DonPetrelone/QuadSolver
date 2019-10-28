@@ -14,7 +14,7 @@
  * @param nLine
  * @return an integer stating what the result was
  */
-int validate (char *line, float f, int nLine);
+int validate (char *line, float *f, int nLine);
 
 /**
  *

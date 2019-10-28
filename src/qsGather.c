@@ -1,6 +1,6 @@
 #include "qsGather.h"
 
-int validate (char *line, float d, int nLine)
+int validate (char *line, float *d, int nLine)
 {
     int ret = 0;//return flag
 
@@ -34,13 +34,13 @@ int validate (char *line, float d, int nLine)
         j++;
     }
 
-    d = atof(line);//convert line into floating point.
+    *d = atof(line);//convert line into floating point.
 
-    if (isnan(d) != 0)//test for nan
+    if (isnan(*d) != 0)//test for nan
     {
         ret = 2;
     }
-    else if (isinf (d) != 0)//test for infinity
+    else if (isinf(*d) != 0)//test for infinity
     {
         ret = 3;
     }
@@ -92,15 +92,15 @@ int doit(qsVars *vars)
             {
                 if (i == 0)
                 {
-                    j = validate(line, a, i);
+                    j = validate(line, &a, i);
                 }
                 else if (i == 1)
                 {
-                    j = validate(line, b, i);
+                    j = validate(line, &b, i);
                 }
                 else
                 {
-                    j = validate(line, c, i);
+                    j = validate(line, &c, i);
                 }
             }
         }
