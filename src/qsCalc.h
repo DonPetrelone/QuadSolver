@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "structs.h"
 
 typedef struct qsStruct {float a; float b; float c; double x1; double x2;} qsVars;
 
