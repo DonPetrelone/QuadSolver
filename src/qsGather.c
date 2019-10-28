@@ -10,6 +10,11 @@ int validate (char *line, float *d, int nLine)
     //check if line is number or not.
     while (ret == 0 && line[j] != '\0')
     {
+        if (line[0] == '-')
+        {
+            j++;
+        }
+
         if (line[j] != '\0')
         {
             if (line[j] == '.')
