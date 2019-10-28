@@ -1,9 +1,9 @@
 #include "qsOutput.h"
 
-int printOutput(qsVars *vars){
-	printf("%s%.4g%s%.4g\n", "X1 = ", vars->x1, "X2 = ", vars->x2);
+void printOutput(qsVars *vars){
+	printf("x1 = %.4g\nx2 = %.4g\n", vars->x1, vars->x2);
 
-	return(0);
+	return;
 }
 
 
