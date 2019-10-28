@@ -8,10 +8,11 @@ int main(int argc, char *argv[])
     vars = malloc(sizeof(qsVars));
 
     vars = doit();
-
-    printf("%f\n", vars->a);
-    printf("%f\n", vars->b);
-    printf("%f\n", vars->c);
+    
+    if (calcOutput(&vars))
+        printf("No real solutions\n");
+    else
+        printOutput(&vars);
 
     return 0;
 }
