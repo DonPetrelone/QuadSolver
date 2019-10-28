@@ -73,9 +73,9 @@ int doit(qsVars *vars)
 {
     int ret = 0;
     char line[80];
-    float a;
-    float b;
-    float c;
+    float a = 0.0;
+    float b = 0.0;
+    float c = 0.0;
 
     int i = 0;
     while (i < 3)

@@ -26,8 +26,9 @@ int getit (char *line, int nLine);
 
 /**
  * Runs the getit and validate functions.
- * @return retVal
+ * @return
  */
 int doit(qsVars *vars);
 
 #endif
+
