@@ -1,6 +1,6 @@
 #include "qsGather.h"
 
-int validate (char *line, float f, int nLine)
+int validate (char *line, float d, int nLine)
 {
     int ret = 0;//return flag
 
@@ -69,7 +69,7 @@ int getit (char *line, int nLine)
     return ret;
 }//End getit
 
-qsVars doit()
+qsVars* doit()
 {
     qsVars *vars;
     char line[80];
@@ -83,7 +83,7 @@ qsVars doit()
         int j = 1;
         while (j != 0)
         {
-            if (getIt(line, i) != 1)
+            if (getit(line, i) != 1)
             {
                 perror("Could not scan line");
             }

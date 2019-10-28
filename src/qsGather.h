@@ -28,6 +28,6 @@ int getit (char *line, int nLine);
  * Runs the getit and validate functions.
  * @return struct of type qsVars
  */
-qsVars doit();
+qsVars* doit();
 
 #endif
