@@ -1,6 +1,6 @@
 #include "qsGather.h"
 
-int validate (char *line, double d, int nLine)
+int validate (char *line, float f, int nLine)
 {
     int ret = 0;//return flag
 
@@ -69,9 +69,9 @@ int getit (char *line, int nLine)
     return ret;
 }//End getit
 
-vars doit()
+qsVars doit()
 {
-
+    qsVars *vars;
     char line[80];
     float a;
     float b;
@@ -89,10 +89,28 @@ vars doit()
             }
             else
             {
-                j = validate(line, a, i);
+                if (i == 0)
+                {
+                    j = validate(line, a, i);
+                }
+                else if (i == 1)
+                {
+                    j = validate(line, b, i);
+                }
+                else
+                {
+                    j = validate(line, c, i);
+                }
             }
         }
         i++;
     }
+
+    //setting a,b and c in the struct.
+    vars->a = a;
+    vars->b = b;
+    vars->c = c;
+
+    return vars;
 
 }//End doit

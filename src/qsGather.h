@@ -14,7 +14,7 @@
  * @param nLine
  * @return an integer stating what the result was
  */
-int validate (char *line, double d, int nLine);
+int validate (char *line, float f, int nLine);
 
 /**
  *
@@ -25,9 +25,9 @@ int validate (char *line, double d, int nLine);
 int getit (char *line, int nLine);
 
 /**
- *
- * @return
+ * Runs the getit and validate functions.
+ * @return struct of type qsVars
  */
-vars doit();
+qsVars doit();
 
 #endif
