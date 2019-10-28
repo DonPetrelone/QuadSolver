@@ -69,9 +69,9 @@ int getit (char *line, int nLine)
     return ret;
 }//End getit
 
-qsVars* doit()
+int doit(qsVars *vars)
 {
-    qsVars *vars;
+    int ret = 0;
     char line[80];
     float a;
     float b;
@@ -86,6 +86,7 @@ qsVars* doit()
             if (getit(line, i) != 1)
             {
                 perror("Could not scan line");
+                ret = -1;
             }
             else
             {
@@ -111,6 +112,6 @@ qsVars* doit()
     vars->b = b;
     vars->c = c;
 
-    return vars;
+    return ret;
 
 }//End doit
