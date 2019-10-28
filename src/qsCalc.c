@@ -8,7 +8,7 @@ int calcOutput(qsVars *vars) {
     ret = -1;
   else {
     vars->x1 = (-1 * vars->b + sqrt((double)d)) / (2 * vars->a);
-    vars->x2 = (-1 * vars->b + sqrt((double)d)) / (2 * vars->a);
+    vars->x2 = (-1 * vars->b - sqrt((double)d)) / (2 * vars->a);
   }
 
   return ret;
