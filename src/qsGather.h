@@ -26,8 +26,8 @@ int getit (char *line, int nLine);
 
 /**
  * Runs the getit and validate functions.
- * @return struct of type qsVars
+ * @return retVal
  */
-qsVars* doit();
+int doit(qsVars *vars);
 
 #endif
