@@ -14,5 +14,5 @@ qsGather.h qsCalc.h qsOutput.h : structs.h
 clean :
 	rm *.o qs
   
-run :
+run : qs
 	./qs
