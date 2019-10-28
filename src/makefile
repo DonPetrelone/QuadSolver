@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=C18 -Wall -pedantic
+CFLAGS = -std=C18 -Wall -pedantic -lm
 
 qs : qs.o qsGather.o qsCalc.o qsOutput.o
 
