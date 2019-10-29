@@ -1,7 +1,8 @@
 CC = gcc
-CFLAGS = -Wall -pedantic -lm
+CFLAGS =-g -Wall -pedantic -lm
 
 qs : qs.o qsGather.o qsCalc.o qsOutput.o
+	${CC} qs.o qsGather.o qsCalc.o qsOutput.o ${CFLAGS} -o qs
 
 qs.o qsGather.o : qsGather.h
 

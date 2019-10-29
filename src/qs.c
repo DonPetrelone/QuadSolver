@@ -7,12 +7,12 @@ int main(int argc, char *argv[])
     qsVars *vars;
     vars = malloc(sizeof(qsVars));
 
-    if (doit(&vars))
+    if (doit(vars))
         printf("Error gathering input\n");
-    else if (calcOutput(&vars))
+    else if (calcOutput(vars))
         printf("No real solutions\n");
     else
-        printOutput(&vars);
+        printOutput(vars);
 
     return 0;
 }
