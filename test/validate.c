@@ -1,6 +1,6 @@
-
 #include validate.h
 
+int validate (char *line, float *d, int nLine)
 {
 
     int ret = 0;//return flag
