@@ -1,6 +1,3 @@
-#ifndef QSGATHER_H
-#define QSGATHER_H
-
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -31,6 +28,4 @@ int getit (char *line, int nLine, int log);
  * @return indicates success or error
  */
 int doit(qsVars *vars);
-
-#endif
 
