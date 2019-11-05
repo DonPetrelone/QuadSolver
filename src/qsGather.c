@@ -70,6 +70,7 @@ int validate (char *line, float *d, int nLine, int log)
      * 0: OK
      */
     return ret;
+
 }//End validate
 
 

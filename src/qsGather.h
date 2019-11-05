@@ -1,5 +1,5 @@
-#ifndef VALIDATE_H
-#define VALIDATE_H
+#ifndef QSGATHER_H
+#define QSGATHER_H
 
 #include <math.h>
 #include <stdlib.h>
