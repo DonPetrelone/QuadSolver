@@ -1,0 +1,1 @@
+typedef struct qsStruct {float a; float b; float c; double x1; double x2; int log;} qsVars;
