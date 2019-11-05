@@ -15,5 +15,8 @@ qsGather.h qsCalc.h qsOutput.h : structs.h
 clean :
 	rm *.o qs
   
-run : qs
-	./qs
+logon: qs
+	./qs on 2>log.txt
+
+logoff: qs
+	./qs off

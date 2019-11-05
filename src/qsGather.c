@@ -1,7 +1,14 @@
 #include "qsGather.h"
 
-int validate (char *line, float *d, int nLine)
+int validate (char *line, float *d, int nLine, int log)
 {
+
+    //logging
+    if (log == 1)
+    {
+        fprintf (stderr, "%s %s %s %f %d\n", "function: validate;","arguments:", line, *d, nLine);
+    }
+
     int ret = 0;//return flag
 
     int j = 0;//iterate through line
@@ -50,6 +57,12 @@ int validate (char *line, float *d, int nLine)
         ret = 3;
     }
 
+    //logging
+    if (log == 1)
+    {
+        fprintf (stderr, "%s %s %d\n", "function: validate;", "return:", ret);
+    }
+
     /*
      * 1: character line is not composed of integer digits
      * 2: it is a nan.
@@ -60,8 +73,16 @@ int validate (char *line, float *d, int nLine)
 }//End validate
 
 
-int getit (char *line, int nLine)
+int getit (char *line, int nLine, int log)
 {
+
+    //logging
+    if (log == 1)
+    {
+        fprintf (stderr, "%s %s %s %d\n", "function: getit;","arguments:", line, nLine);
+    }
+
+
     char c = 'a';
 
     //prints out a prompt to user with what letter it is time to get
@@ -70,12 +91,26 @@ int getit (char *line, int nLine)
     //scan for user input and stores it in the line buffer.
     int ret = scanf("%s", line);
 
+    //logging
+    if (log == 1)
+    {
+        fprintf (stderr, "%s %s %d\n", "function: getit;", "return:", ret);
+    }
+
     //returns whatever is returned from the scan function.
     return ret;
+
 }//End getit
 
 int doit(qsVars *vars)
 {
+    //logging
+    if (vars->log == 1)
+    {
+        fprintf (stderr, "%s %s %f %f %f %f %f\n", "function: doit;", "a, b, c, x1, x2", vars->a,
+                 vars->b, vars->c, vars->x1, vars->x2);
+    }
+
     int ret = 0;
     char line[80];
     float a = 0.0;
@@ -88,7 +123,7 @@ int doit(qsVars *vars)
         int j = 1;
         while (j != 0)
         {
-            if (getit(line, i) != 1)
+            if (getit(line, i, vars->log) != 1)
             {
                 perror("Could not scan line");
                 ret = -1;
@@ -97,15 +132,15 @@ int doit(qsVars *vars)
             {
                 if (i == 0)
                 {
-                    j = validate(line, &a, i);
+                    j = validate(line, &a, i, vars->log);
                 }
                 else if (i == 1)
                 {
-                    j = validate(line, &b, i);
+                    j = validate(line, &b, i, vars->log);
                 }
                 else
                 {
-                    j = validate(line, &c, i);
+                    j = validate(line, &c, i, vars->log);
                 }
             }
         }
@@ -116,6 +151,12 @@ int doit(qsVars *vars)
     vars->a = a;
     vars->b = b;
     vars->c = c;
+
+    //logging
+    if (vars->log == 1)
+    {
+        fprintf (stderr, "%s %s %d\n", "function: doit;", "return:", ret);
+    }
 
     return ret;
 
