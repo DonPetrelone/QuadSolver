@@ -16,6 +16,8 @@ int main(int argc, char *argv[])
     else if (strcmp (argv[1], "off") == 0)
     {
         vars->log = 0;
+        //clear log.txt file
+        fopen ("log.txt", "w");
     }
 
     if (doit(vars))
