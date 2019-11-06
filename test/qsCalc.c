@@ -1,6 +1,7 @@
 #include "qsCalc.h"
 
-int calcOutput(qsVars *vars) {
+int calcOutput(qsVars *vars)
+{
 
     int ret = 0;
     int d;
@@ -15,7 +16,8 @@ int calcOutput(qsVars *vars) {
     return ret;
 }
 
-int calcDiscriminant(qsVars *vars, int *d) {
+int calcDiscriminant(qsVars *vars, int *d)
+{
 
     int ret = 0;
     *d = vars->b * vars->b - 4 * vars->a * vars->c;
