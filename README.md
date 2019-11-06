@@ -12,7 +12,7 @@ Vinicius Petrelli Cicerone
 # Faculty
 Dr. John Kapenga
 
-#What's in this repository
+# What's in this repository
 
 Each directory contains important information about the project.
 Here is a summary of what each directory has:
