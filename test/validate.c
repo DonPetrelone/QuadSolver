@@ -1,6 +1,6 @@
 #include "validate.h"
 
-int validate (char *line, float *d, int nLine)
+int validate (char *line, float *d)
 {
 
     int ret = 0;//return flag
@@ -27,13 +27,13 @@ int validate (char *line, float *d, int nLine)
             {
                 if (isdigit(line[j]) == 0 && line[j] != '.')
                 {
-                    printf("%s\n", "Not valid. Try again");
+                    //printf("%s\n", "Not valid. Try again");
                     ret = 1; //not a digit
                 }
             }
             else
             {
-                printf("%s\n", "Not valid. Try again.");
+                //printf("%s\n", "Not valid. Try again.");
                 ret = 1;//not a digit
             }
         }
