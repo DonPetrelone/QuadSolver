@@ -8,6 +8,7 @@ int main()
     //test if you get inf
     //test if you get nan
     //test you get values that are not
+    //cannot have more than the size of buffer
 
     cunit_print("validate tests should all pass.");
     cunit_date("\n");
@@ -42,7 +43,6 @@ int main()
     ret = validate(line, &d);
     assertd_eq("ret",ret,0);
     assertf_eq("d", d, f);
-
 
 
     return 0;

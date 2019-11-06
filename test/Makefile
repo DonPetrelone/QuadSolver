@@ -20,5 +20,9 @@ valtest: validate
 calctest: qsCalc
 	./qsCalc
 
+system: qsCalc validate
+	./qsCalc
+	./validate
+
 clean:
 	rm *.o validate qsCalc
