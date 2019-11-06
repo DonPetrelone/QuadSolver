@@ -5,4 +5,4 @@
 
 int calcOutput(qsVars *vars);
 
-int calcDiscriminant(qsVars *vars, int *d);
+int calcDiscriminant(qsVars *vars, double *d);

@@ -1,4 +1,4 @@
-#include validate.h
+#include "validate.h"
 
 int validate (char *line, float *d, int nLine)
 {
