@@ -17,6 +17,15 @@ int calcOutput(qsVars *vars) {
   else {
     vars->x1 = (-1 * vars->b + sqrt((double)d)) / (2 * vars->a);
     vars->x2 = (-1 * vars->b - sqrt((double)d)) / (2 * vars->a);
+
+      //making sure x1 is smaller than x2
+      if (vars->x1 > vars->x2)
+      {
+          double temp = vars->x1;
+          vars->x1 = vars->x2;
+          vars->x2 = temp;
+      }
+
   }
 
     //logging
