@@ -5,6 +5,8 @@
 
 int main(int argc, char *argv[])
 {
+    printf("%s\n", "+---------- Quad Solver ------------+");
+
     qsVars *vars;
     vars = malloc(sizeof(qsVars));
 
@@ -26,6 +28,8 @@ int main(int argc, char *argv[])
         printf("No real solutions\n");
     else
         printOutput(vars);
+
+    printf("%s\n", "+-------------- Done ---------------+");
 
     return 0;
 }
