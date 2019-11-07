@@ -10,3 +10,4 @@ C Programming Language
 
 - C11
 - Use -Wall, -pedantic, -lm, -std=c11 compile flags.
+- Follow same indentation patterns
