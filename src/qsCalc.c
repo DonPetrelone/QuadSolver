@@ -12,7 +12,7 @@ int calcOutput(qsVars *vars) {
   int ret = 0;
   int d;
 
-  if (calcDiscriminant(vars, &d) || vars-> a == 0)        // adjust r for different outcomes?
+  if (calcDiscriminant(vars, &d) || vars-> a == 0)
     ret = -1;
   else {
     vars->x1 = (-1 * vars->b + sqrt((double)d)) / (2 * vars->a);
