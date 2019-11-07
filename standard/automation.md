@@ -5,7 +5,7 @@ This file describes the major and local standards for automation of running the 
 # Major Standards
 The major standard for automation is Make
 
-#Local Standards
+# Local Standards
 
 Unit tests: automation is also done through make
 
