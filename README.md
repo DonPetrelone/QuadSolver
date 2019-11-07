@@ -4,7 +4,7 @@ Project for Western Michigan University's CS4900 - Senior Software Development I
 This project contains a Linux command line tool to solve quadratic equations. The goal was to
 practice the principles of extreme programming and unit testing.
 
-#Authors
+# Authors
 Dylan Lafleur\
 Paxton Plum\
 Vinicius Petrelli Cicerone
