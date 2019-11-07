@@ -22,4 +22,11 @@ Here is a summary of what each directory has:
 - legal: all legalities associated with product licenses and the client.
 - src: the source code
 - standard: the standards for all of the requirements
-- test: unit tests 
+- test: unit tests
+
+# Downloading and Running (in progress)
+1) cd to target directory
+2) git pull .tar file
+3) extract file to new dir
+4) cd to new dir
+5) make run with args
