@@ -24,9 +24,8 @@ Here is a summary of what each directory has:
 - standard: the standards for all of the requirements
 - test: unit tests
 
-# Downloading and Running (in progress)
+# Downloading and Running
 1) cd to target directory
-2) git pull .tar file
-3) extract file to new dir
-4) cd to new dir
-5) make run with args
+2) clone git repo
+3) cd to src
+4) make run <a> <b> <c>
